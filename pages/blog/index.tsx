@@ -15,7 +15,7 @@ type PageProps = {
   posts: PostItem[]
 }
 
-const Blog = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const BlogPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Page title="Blog" description="Writing about design and code.">
       <Information title="Blog">
@@ -48,4 +48,4 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
   }
 }
 
-export default Blog
+export default BlogPage
