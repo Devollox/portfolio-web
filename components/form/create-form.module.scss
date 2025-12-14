@@ -1,0 +1,45 @@
+.form_wrapper {
+  display: flex;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+.wrapper {
+  background-color: var(--bg);
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--inline-radius);
+  position: relative;
+  height: 200px;
+  width: 330px;
+  position: relative;
+}
+.signature_wrapper {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  width: 320px;
+  height: 150px;
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--radius);
+  margin: 5px 5px 5px 4.2px;
+  margin: 5px;
+  position: relative;
+  overflow: hidden;
+}
+.button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 4px;
+  color: var(--gray);
+  transition: background var(--transitions-duration) ease-in-out,
+    color var(--transitions-duration) ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--fg);
+  }
+}
+

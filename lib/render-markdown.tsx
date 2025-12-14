@@ -1,0 +1,165 @@
+import { marked, type Tokens } from 'marked'
+import { format } from 'prettier'
+import Highlight, { defaultProps } from 'prism-react-renderer'
+import { renderToStaticMarkup } from 'react-dom/server'
+import linkStyles from '../components/link/link.module.scss'
+
+const renderer = new marked.Renderer()
+
+renderer.heading = ({ tokens, depth }: Tokens.Heading): string => {
+  const text = marked
+    .parser([{ type: 'paragraph', tokens } as any])
+    .replace(/<\/?p>/g, '')
+
+  const id = text
+    .toLowerCase()
+    .replace(/[^\w]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+  const Component = `h${depth}` as keyof JSX.IntrinsicElements
+
+  return renderToStaticMarkup(
+    <Component>
+      <a href={`#${id}`} id={id} className="header-link">
+        {text}
+      </a>
+    </Component>
+  )
+}
+
+renderer.link = ({ href, title, tokens }: Tokens.Link): string => {
+  const text = marked
+    .parser([{ type: 'paragraph', tokens } as any])
+    .replace(/<\/?p>/g, '')
+
+  return `<a href="${href}" title="${
+    title ?? ''
+  }" target="_blank" rel="noopener noreferrer" class="${
+    linkStyles.underline
+  }">${text}</a>`
+}
+
+renderer.checkbox = () => ''
+
+renderer.listitem = ({ text, task, checked }: Tokens.ListItem): string => {
+  if (task) {
+    return `<li class="reset"><span class="check">&#8203;<input type="checkbox" disabled ${
+      checked ? 'checked' : ''
+    } /></span><span>${text}</span></li>`
+  }
+
+  return `<li>${text}</li>`
+}
+
+renderer.code = ({ text, lang }: Tokens.Code): string => {
+  const code = text
+  const options = lang ?? ''
+  const opts = options.split(' ').map(o => o.trim())
+  const language = opts[0] || ''
+  const highlight = opts
+    .filter(o => o.startsWith('highlight='))
+    .pop()
+    ?.replace('highlight=', '')
+    .trim()
+  const raw = options.includes('raw')
+
+  let formattedCode = code
+
+  if (!raw) {
+    try {
+      formattedCode = format(code, {
+        semi: false,
+        singleQuote: true,
+        parser:
+          language === 'jsx' || language === 'tsx'
+            ? 'babel'
+            : (language as any)
+      })
+    } catch {}
+  }
+
+  return renderToStaticMarkup(
+    <pre>
+      <Code language={language} code={formattedCode} highlight={highlight} />
+    </pre>
+  )
+}
+
+marked.use({
+  gfm: true,
+  breaks: true,
+  renderer
+})
+
+export default (markdown: string): string =>
+  marked.parse(markdown, { async: false }) as string
+
+type CodeProps = {
+  code: string
+  language?: string
+  highlight?: string
+} & React.HTMLAttributes<HTMLElement>
+
+const emptyTheme = { plain: {}, styles: [] as any[] }
+
+const Code = ({ code, language, highlight, ...props }: CodeProps) => {
+  if (!language) {
+    return (
+      <code
+        {...props}
+        dangerouslySetInnerHTML={{ __html: code }}
+      />
+    )
+  }
+
+  const highlightedLines = highlight
+    ? highlight.split(',').reduce<number[]>((lines, h) => {
+        if (h.includes('-')) {
+          const [start, end] = h.split('-').map(Number)
+          const x = Array(end - start + 1)
+            .fill(0)
+            .map((_, i) => i + start)
+          return [...lines, ...x]
+        }
+
+        return [...lines, Number(h)]
+      }, [])
+    : []
+
+  return (
+    <Highlight
+      {...defaultProps}
+      theme={emptyTheme}
+      code={code.trim()}
+      language={language as any}
+    >
+      {({ className, tokens, getLineProps, getTokenProps }) => (
+        <code className={className} style={{}}>
+          {tokens.map((line, i) => (
+            <div
+              key={i}
+              {...getLineProps({ line, key: i })}
+              style={
+                highlightedLines.includes(i + 1)
+                  ? {
+                      background: 'var(--highlight)',
+                      margin: '0 -1rem',
+                      padding: '0 1rem'
+                    }
+                  : undefined
+              }
+            >
+              {line.map((token, key) => (
+                <span
+                  key={key}
+                  {...getTokenProps({ token, key })}
+                  style={{}}
+                />
+              ))}
+            </div>
+          ))}
+        </code>
+      )}
+    </Highlight>
+  )
+}

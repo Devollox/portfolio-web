@@ -1,0 +1,91 @@
+.wrapper {
+  margin-top: 80px;
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.marquee {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.gradientLeft,
+.gradientRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.gradientLeft {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, transparent 100%);
+}
+
+.gradientRight {
+  right: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--bg) 100%);
+}
+
+.track {
+  display: flex;
+  gap: 10px;
+  user-select: none;
+  padding: 0 20px;
+  animation: slideUsedBy 70s linear infinite;
+}
+
+.track:hover {
+  animation-play-state: paused;
+}
+
+.skill {
+  background-color: var(--bg);
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--inline-radius);
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  user-select: none;
+  cursor: default;
+}
+
+.track:hover .skill {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.skill:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent, #ffffff);
+  transform: translateY(-1px);
+}
+
+@keyframes slideUsedBy {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

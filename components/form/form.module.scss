@@ -1,0 +1,67 @@
+.form_wrapper {
+  display: flex;
+  height: 200px;
+  width: 330px;
+  background-color: var(--bg);
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--inline-radius);
+  position: relative;
+}
+.wrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.signature_wrapper {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--radius);
+  margin: 5px 5px 5px 4.2px;
+  width: 320px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+}
+.name_user {
+  position: absolute;
+  margin-top: 163px;
+  margin-left: 20px;
+  color: var(--fg);
+
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.name_text {
+  max-width: 160px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.date_text {
+  white-space: nowrap;
+  margin-left: 4px;
+}
+.image_signature {
+  width: 320px;
+  height: 150px;
+  margin-top: 5px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+[data-theme='dark'] .image_signature {
+  filter: brightness(0) invert(1);
+}
+
+[data-theme='light'] .image_signature {
+  filter: brightness(0) invert(0);
+}

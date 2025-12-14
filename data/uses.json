@@ -1,0 +1,146 @@
+{
+  "computer": [
+    {
+      "title": "Intel Xeon E5 2678 V3",
+      "description": "Oh this processor is Chinese."
+    },
+    {
+      "title": "Intel X99H",
+      "description": "Half of the RAM refuses to work."
+    },
+    {
+      "title": "XPG 32GB",
+      "description": "Is it possible to have 64GB - no, you can’t!."
+    },
+    {
+      "title": "Coolers Snowman",
+      "description": "Is there anything louder than this cooler?"
+    },
+    {
+      "title": "AeroCool ECO 550W",
+      "description": "Works almost like a transformer."
+    },
+    {
+      "title": "GIGABYTE GTX 1060 6GB",
+      "description": "People's video card."
+    },
+    {
+      "title": "512GB SSDM.2 Patriot P300",
+      "description": "I need more memory!"
+    },
+    {
+      "title": "1STPLAYER Megaview",
+      "description": "Took it from a homeless person."
+    }
+  ],
+  "desk": [
+    {
+      "title": "GIGABYTE G24F2 23.8\" FullHD Monitor",
+      "description": "I love the smoothness and black theme."
+    }
+  ],
+  "mouse": [
+    {
+      "title": "Delux M800PRO",
+      "description": "The mouse breaks more than this site."
+    },
+    {
+      "title": "AJ390",
+      "description": "We are very good."
+    },
+    {
+      "title": "Razer Viper MINI",
+      "description": "Broke after a month :("
+    },
+    {
+      "title": "ATTACK SHARK R5 ultra",
+      "description": "My dream!"
+    }
+  ],
+  "keyboard": [
+    {
+      "title": "Fizz K617",
+      "description": "My preferred wireless keyboard with a 65% compact layout."
+    },
+    {
+      "title": "AJAZZ AK680MAX",
+      "description": "If anything I love astronomy."
+    }
+  ],
+  "microphone": [
+    {
+      "title": "Fifine K688",
+      "description": "Chinese copy - Shure SM7B."
+    },
+    {
+      "title": "Fifine A8",
+      "description": "Well, this is top bang for your buck!"
+    },
+    {
+      "title": "Fifine AM8",
+      "description": "It really does look like a brick."
+    },
+    {
+      "title": "Fifine K669",
+      "description": "Scary sound."
+    }
+  ],
+  "coding": [
+    {
+      "title": "VSCode",
+      "description": "I moved to VSCode like everybody else."
+    },
+    {
+      "title": "WebStorm",
+      "description": "I end up sitting here :P."
+    }
+  ],
+  "apps": [
+    {
+      "title": "Adobe Photoshop",
+      "description": "I usually use it rarely, for creating illustrations."
+    },
+    {
+      "title": "VEGAS Pro",
+      "description": "Best editing apps."
+    },
+    {
+      "title": "Steam",
+      "description": "What else is needed for happiness?"
+    },
+    {
+      "title": "Discord",
+      "description": "Better than Skype."
+    },
+    {
+      "title": "Wallpaper Engine",
+      "description": "Always black wallpaper."
+    }
+  ],
+  "services": [
+    {
+      "title": "Vercel",
+      "description": "Here is where I host all my websites. By far the best developer experience."
+    },
+    {
+      "title": "Firebase",
+      "description": "A no-brainer database and auth solution for side projects."
+    },
+    {
+      "title": "Figma",
+      "description": "I never thought something would replace the Adobe suite for me. Figma did."
+    },
+    {
+      "title": "RegRU",
+      "description": "I buy and renew all my domains here."
+    },
+    {
+      "title": "Cloudflare",
+      "description": "The DNS service I use with all my domains. Amazing product."
+    },
+    {
+      "title": "Spotify",
+      "description": "I love listening to phonk while I'm writing code.."
+    }
+  ]
+}
