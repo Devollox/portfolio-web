@@ -1,3 +1,27 @@
 .wrapper_error_page {
   position: relative;
+  margin-top: 32px;
+  padding-top: 4px;
+}
+
+.quote_label {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--colors-secondary);
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.quote_text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.quote_footer {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  opacity: 0.7;
 }
