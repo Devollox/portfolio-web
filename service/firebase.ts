@@ -255,8 +255,7 @@ export const updateCursor = (
 
 export const filterActiveCursors = (
   cursors: CursorWithId[],
-  selfId: string | null,
-  windowMs: number
+  selfId: string | null
 ): CursorWithId[] => {
   const now = Date.now()
   return cursors
@@ -332,4 +331,5 @@ export const subscribePopularUseTools = (
   })
   return unsubscribe
 }
+
 
