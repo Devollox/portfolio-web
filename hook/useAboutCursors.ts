@@ -82,7 +82,8 @@ export const useAboutCursors = () => {
         name,
         color: colorRef.current,
         x,
-        y
+        y,
+        lastSeen: Date.now()
       })
     }
 
