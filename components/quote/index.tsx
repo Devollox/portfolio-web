@@ -11,7 +11,7 @@ const Quote = ({ title, quote, author }: QuoteProps) => {
   useEncoding('effectQuote', 25)
 
   return (
-    <section className={styles.wrapper_error_page}>
+    <section className={styles.wrapper}>
       <span className={styles.quote_label}>{title}</span>
 
       <blockquote>
@@ -25,3 +25,4 @@ const Quote = ({ title, quote, author }: QuoteProps) => {
 }
 
 export default Quote
+
