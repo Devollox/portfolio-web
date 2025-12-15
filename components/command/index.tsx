@@ -100,6 +100,7 @@ const CommandMenu = memo(
         'g s': () => router.push('/signature'),
         'g b': () => router.push('/blog'),
         'g a': () => router.push('/about'),
+        'g d': () => router.push('/developer'),
         'g h': () => router.push('/')
       }),
       [router, setPages]
