@@ -14,6 +14,7 @@ import {
   ref,
   remove,
   runTransaction,
+  serverTimestamp,
   set
 } from 'firebase/database'
 
@@ -44,6 +45,7 @@ type CursorData = {
   y: number
   color?: string
   name?: string
+  lastSeen?: number
   [key: string]: unknown
 }
 
@@ -236,7 +238,10 @@ export const updateCursor = (
   data: CursorData
 ): Promise<void> => {
   const cursorRef = ref(database, `cursors/${room}/${userId}`)
-  return set(cursorRef, data)
+  return set(cursorRef, {
+    ...data,
+    lastSeen: serverTimestamp()
+  })
 }
 
 export const subscribeCursors = (
