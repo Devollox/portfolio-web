@@ -11,7 +11,7 @@ type AvatarCardProps = {
 const AvatarCard = ({
   tooltip = 'hello!',
   name,
-  avatarSrc = '/pers.png'
+  avatarSrc = 'devollox'
 }: AvatarCardProps) => {
   const [hovered, setHovered] = useState(false)
 
@@ -42,7 +42,7 @@ const AvatarCard = ({
       >
         <div className={styles.avatarWrapper}>
           <Image
-            src={avatarSrc}
+            src={`/characters/${avatarSrc}.webp`}
             alt={`${name} character`}
             width={64}
             height={128}
