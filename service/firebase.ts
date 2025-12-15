@@ -40,9 +40,9 @@ export type Signature = {
 
 type RawSignature = Omit<Signature, 'id'>
 
-type CursorData = {
-  x: number
-  y: number
+export type CursorData = {
+  x?: number
+  y?: number
   color?: string
   name?: string
   lastSeen?: number
@@ -57,6 +57,15 @@ type PopularTool = {
 }
 
 type Unsubscribe = () => void
+
+export type CursorWithId = {
+  id: string
+  name?: string
+  color?: string
+  x?: number
+  y?: number
+  lastSeen?: number
+}
 
 const appConfig: FirebaseEnvConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY as string,
@@ -242,6 +251,17 @@ export const updateCursor = (
     ...data,
     lastSeen: serverTimestamp()
   })
+}
+
+export const filterActiveCursors = (
+  cursors: CursorWithId[],
+  selfId: string | null,
+  windowMs: number
+): CursorWithId[] => {
+  const now = Date.now()
+  return cursors
+    .filter(item => item.id !== selfId)
+    .filter(c => now - (c.lastSeen ?? 0) < windowMs)
 }
 
 export const subscribeCursors = (
