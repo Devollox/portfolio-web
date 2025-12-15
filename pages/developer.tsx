@@ -35,7 +35,6 @@ const DeveloperPage = () => {
             first and useful second.
           </Information>
         </div>
-        <AvatarCard name="Devollox" tooltip="hello!" />
       </div>
 
       <section
@@ -83,6 +82,34 @@ const DeveloperPage = () => {
             feels a bit odd, it&apos;s probably being experimented on.
             `}
         />
+      </section>
+      <section
+        style={{
+          marginTop: '40px',
+          marginBottom: '2.5rem',
+          alignItems: 'stretch'
+        }}
+      >
+        <Information title="Team" as="h2">
+          The &quot;team&quot; is mostly one developer shipping experiments,
+          plus one very patient friend trying to break them before anyone else
+          can.
+        </Information>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '1rem'
+          }}
+        >
+          <AvatarCard name="Devollox" tooltip="writes the bugs." />
+          <AvatarCard
+            name="White"
+            tooltip="finds the bugs."
+            avatarSrc="white"
+          />
+        </div>
       </section>
       <Quote
         title="On shipping experiments."
