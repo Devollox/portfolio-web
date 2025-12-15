@@ -15,7 +15,7 @@ const QuoteHero = ({
   name,
   subtitle,
   text,
-  avatarSrc = '/pers.png'
+  avatarSrc = '/characters/devollox.webp'
 }: QuoteHeroProps) => {
   const [hoveredCard, setHoveredCard] = useState(false)
 
