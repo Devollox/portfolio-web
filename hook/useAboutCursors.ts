@@ -47,8 +47,10 @@ export const useAboutCursors = () => {
           ...value
         }))
 
+        const now = Date.now()
         const filtered = list
           .filter(item => item.id !== userIdRef.current)
+          .filter(c => now - (c.lastSeen ?? 0) < 30000)
 
         setOthers(filtered)
       }
@@ -76,12 +78,12 @@ export const useAboutCursors = () => {
       }
 
       const name = (session && session.user && session.user.name) || 'Guest'
+
       updateCursor(ROOM, userIdRef.current, {
         name,
         color: colorRef.current,
         x,
-        y,
-        lastSeen: Date.now()
+        y
       })
     }
 
