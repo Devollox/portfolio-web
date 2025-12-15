@@ -10,7 +10,9 @@
   overflow: hidden;
   z-index: 0;
   background-color: var(--bg);
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: default;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .wrapper::after {
@@ -34,7 +36,7 @@
 }
 
 .wrapper:hover::after {
-  opacity: 0.5;
+  opacity: 0.55;
 }
 
 .header {
