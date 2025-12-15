@@ -10,7 +10,6 @@ import {
 } from 'service/firebase'
 
 const ROOM = 'about'
-const ACTIVE_WINDOW_MS = 30000
 
 const randomColor = (): string => {
   const colors = ['#ff4b81', '#4bc0ff', '#7fff4b', '#ffd54b', '#b54bff']
@@ -49,8 +48,7 @@ export const useAboutCursors = () => {
 
         const filtered = filterActiveCursors(
           list,
-          userIdRef.current,
-          ACTIVE_WINDOW_MS
+          userIdRef.current
         )
 
         setOthers(filtered)
