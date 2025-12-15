@@ -11,14 +11,16 @@ const Quote = ({ title, quote, author }: QuoteProps) => {
   useEncoding('effectQuote', 25)
 
   return (
-    <div className={styles.wrapper_error_page}>
-      <a>{title}</a>
+    <section className={styles.wrapper_error_page}>
+      <span className={styles.quote_label}>{title}</span>
 
-      <blockquote cite="http://www.aaronsw.com/weblog/visitingmit">
-        <p>{quote}</p>
-        <footer id="effectQuote">— {author}</footer>
+      <blockquote>
+        <p className={styles.quote_text}>{quote}</p>
+        <footer id="effectQuote" className={styles.quote_footer}>
+          — {author}
+        </footer>
       </blockquote>
-    </div>
+    </section>
   )
 }
 
