@@ -1,9 +1,16 @@
 import { useUserId } from 'hook/useUserId'
 import { useSession } from 'next-auth/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { removeCursor, subscribeCursors, updateCursor } from 'service/firebase'
+import {
+  CursorData,
+  filterActiveCursors,
+  removeCursor,
+  subscribeCursors,
+  updateCursor
+} from 'service/firebase'
 
 const ROOM = 'about'
+const ACTIVE_WINDOW_MS = 30000
 
 const randomColor = (): string => {
   const colors = ['#ff4b81', '#4bc0ff', '#7fff4b', '#ffd54b', '#b54bff']
@@ -18,14 +25,7 @@ type CursorRaw = {
   lastSeen?: number
 }
 
-type Cursor = {
-  id: string
-  name?: string
-  color?: string
-  x?: number
-  y?: number
-  lastSeen?: number
-}
+type Cursor = CursorData & { id: string }
 
 export const useAboutCursors = () => {
   const { data: session } = useSession()
@@ -47,10 +47,11 @@ export const useAboutCursors = () => {
           ...value
         }))
 
-        const now = Date.now()
-        const filtered = list
-          .filter(item => item.id !== userIdRef.current)
-          .filter(c => now - (c.lastSeen ?? 0) < 30000)
+        const filtered = filterActiveCursors(
+          list,
+          userIdRef.current,
+          ACTIVE_WINDOW_MS
+        )
 
         setOthers(filtered)
       }
