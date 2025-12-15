@@ -261,7 +261,6 @@ export const filterActiveCursors = (
   const now = Date.now()
   return cursors
     .filter(item => item.id !== selfId)
-    .filter(c => now - (c.lastSeen ?? 0) < windowMs)
 }
 
 export const subscribeCursors = (
@@ -333,3 +332,4 @@ export const subscribePopularUseTools = (
   })
   return unsubscribe
 }
+
