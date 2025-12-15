@@ -1,18 +1,14 @@
-h2.title_block {
-  color: var(--fg);
-  margin: 0px 0 0;
-  font-size: 24px;
+.list_root {
+  margin: 0;
+  padding: 0;
 }
 
-a.ul {
-  border-bottom: 0.5px solid var(--fg);
-  color: var(--fg);
-  text-decoration: none;
-  transition: opacity var(--transitions-duration) ease-in-out;
-}
-
-.list > button {
-  background-color: var(--bg);
+.list {
+  list-style: none;
+  margin-bottom: 5px;
+  button {
+    background-color: var(--bg);
+  }
 }
 
 .list::marker {
@@ -26,6 +22,36 @@ a.ul {
   border: none;
   background: none;
   cursor: pointer;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: baseline;
+}
+
+.ul {
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  border-bottom: 0.5px solid var(--fg);
+  color: var(--fg);
+  text-decoration: none;
+  transition: opacity var(--transitions-duration) ease-in-out;
+}
+
+.title_btn:hover .ul {
+  opacity: 0.85;
+}
+
+.meta_selection,
+.meta_desc {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+  font-size: 0.75rem;
+  color: var(--colors-secondary);
+}
+
+.meta_selection {
+  margin-left: 4px;
 }
 
 .using_meta {
@@ -41,6 +67,7 @@ a.ul {
 }
 
 .modal_backdrop {
+  z-index: 50;
   position: fixed;
   inset: 0;
   background: radial-gradient(
@@ -81,18 +108,14 @@ a.ul {
   color: var(--fg);
 }
 
-.modal_close {
+.modal_title_badge {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   padding: 2px 6px;
-  border: none;
-  background: none;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--colors-secondary);
-  cursor: pointer;
-  font-size: 16px;
-  transition: color 0.18s ease;
-}
-
-.modal_close:hover {
-  color: var(--fg);
 }
 
 .modal_desc {
@@ -134,6 +157,17 @@ a.ul {
   color: var(--fg);
 }
 
+.checkbox_btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.checkbox_btn:disabled:hover {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.06);
+  color: var(--colors-secondary);
+}
+
 .checkbox {
   width: 14px;
   height: 14px;
@@ -171,21 +205,6 @@ a.ul {
   opacity: 0.8;
 }
 
-@media (max-width: 768px) {
-  .modal {
-    max-width: 100%;
-  }
-}
-.checkbox_btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.checkbox_btn:disabled:hover {
-  background-color: transparent;
-  border-color: rgba(255, 255, 255, 0.06);
-  color: var(--colors-secondary);
-}
 .modal_popular {
   padding-top: 6px;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -235,12 +254,49 @@ a.ul {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
-.modal_title_badge {
+
+@media (max-width: 768px) {
+  .modal {
+    max-width: 100%;
+  }
+}
+
+.list_header {
+  grid-gap: 0.5rem;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  display: flex;
+}
+
+.title_block {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  font-size: 0.85rem;
+}
+
+.list_badge {
+  padding: 2px 6px;
+  border: 1px solid #ffffff14;
+  border-radius: var(--radius);
   font-size: 10px;
+  opacity: 0.6;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 2px 6px;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--colors-secondary);
+}
+
+.list_section {
+  gap: 0.9rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.description {
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+  margin-bottom: 0.2rem;
+  font-size: 0.85rem;
+  text-transform: lowercase;
 }
