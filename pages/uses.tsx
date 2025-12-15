@@ -39,7 +39,8 @@ const UsesPage = ({}: Props) => {
   const renderList = (
     sectionName: string,
     title: string,
-    items: { title: string; description: string }[]
+    items: { title: string; description: string }[],
+    badge: string
   ) => {
     if (!items || !Array.isArray(items) || items.length === 0) return null
 
@@ -51,15 +52,20 @@ const UsesPage = ({}: Props) => {
     return (
       <div
         style={{
-          maxWidth: '720px',
           margin: '10px auto 0',
-          padding: '16px 12px 16px',
           borderRadius: 'var(--inline-radius)',
           border: '1px solid var(--lighter-gray)',
-          backgroundColor: 'var(--bg)'
+          backgroundColor: 'var(--bg)',
+          gap: '0.9rem',
+          flexDirection: 'column',
+          marginTop: '30px',
+          padding: '0.9rem 1.1rem 1.05rem',
+          display: 'flex',
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <List listTitle={title}>
+        <List listTitle={title} badge={badge}>
           {items.map((entry, index) => (
             <ListIndex
               key={`${sectionName}-${index}`}
@@ -92,14 +98,14 @@ const UsesPage = ({}: Props) => {
         </Information>
       </div>
 
-      {renderList('computer', 'Computer', computer)}
-      {renderList('desk', 'Desk', desk)}
-      {renderList('mouse', 'Mouse', mouse)}
-      {renderList('keyboard', 'Keyboard', keyboard)}
-      {renderList('microphone', 'Microphone', microphone)}
-      {renderList('coding', 'Coding', coding)}
-      {renderList('apps', 'Apps', apps)}
-      {renderList('services', 'Services', services)}
+      {renderList('computer', 'Computer', computer, 'Core')}
+      {renderList('desk', 'Desk', desk, 'Desk setup')}
+      {renderList('mouse', 'Mouse', mouse, 'Pointer')}
+      {renderList('keyboard', 'Keyboard', keyboard, 'Keys')}
+      {renderList('microphone', 'Microphone', microphone, 'Audio')}
+      {renderList('coding', 'Coding', coding, 'Stack')}
+      {renderList('apps', 'Apps', apps, 'Software')}
+      {renderList('services', 'Services', services, 'Cloud')}
     </Page>
   )
 }
