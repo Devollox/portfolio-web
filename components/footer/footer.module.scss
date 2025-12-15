@@ -94,6 +94,9 @@
 }
 
 .footer_bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   border-top: 1px solid var(--lighter-gray);
   padding-top: 12px;
 }
@@ -214,7 +217,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 2px 6px;
-  border-radius: 999px;
+  border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--colors-secondary);
 }

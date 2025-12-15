@@ -15,5 +15,5 @@ interface CountUpProps {
 
 export default function CountUp(props: CountUpProps) {
   const { ref } = useCountUp(props)
-  return <span className={props.className} ref={ref} />
+  return <span style={{ opacity: '1' }} className={props.className} ref={ref} />
 }

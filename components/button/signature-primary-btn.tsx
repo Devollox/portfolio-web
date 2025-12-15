@@ -12,7 +12,7 @@ const SignaturePrimaryButton = ({
 }: SignaturePrimaryButtonProps) => (
   <div className={styles.wrapper_button}>
     <button className={styles.button} type="button" onClick={onClick}>
-      {children}
+      <span>{children}</span>
     </button>
   </div>
 )

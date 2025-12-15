@@ -1,11 +1,11 @@
 .reset {
+  transition: color 0.2s ease;
   outline: none;
   color: var(--fg);
   text-decoration: none;
 }
 
 .gray {
-  transition: color 0.2s ease;
   color: var(--gray);
 }
 

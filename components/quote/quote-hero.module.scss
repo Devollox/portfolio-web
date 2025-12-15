@@ -1,0 +1,112 @@
+.wrapper {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--inline-radius);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+  transform-origin: bottom center;
+  transition: opacity 180ms ease-out, transform 180ms ease-out;
+}
+
+.inner {
+  width: 100%;
+  position: relative;
+  padding: 0.85rem 1.1rem 1.1rem 1.1rem;
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--inline-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  cursor: default;
+  overflow: hidden;
+  z-index: 0;
+  background-color: var(--bg);
+}
+
+.badgeVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.badgeHidden {
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+}
+
+.inner::after {
+  content: '';
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  left: var(--mouse-x);
+  top: var(--mouse-y);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 60%);
+  filter: blur(22px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.inner:hover::after {
+  opacity: 0.5;
+}
+
+.header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.avatarWrapperOuter {
+  position: relative;
+  display: flex;
+  max-height: 8rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avatarWrapperInner {
+  position: relative;
+  width: 40px;
+  height: 80px;
+}
+
+.avatar {
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  transform: translateX(-50%);
+  border-radius: 0.4rem;
+}
+
+.name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.text {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  line-height: 1.6;
+}

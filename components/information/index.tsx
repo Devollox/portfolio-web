@@ -1,15 +1,20 @@
 import { ReactNode } from 'react'
 
+type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4'
+
 type InformationProps = {
   title: string
   children: ReactNode
+  as?: HeadingLevel
 }
 
-const Information = ({ title, children }: InformationProps) => {
+const Information = ({ title, children, as = 'h1' }: InformationProps) => {
+  const HeadingTag = as
+
   return (
     <>
-      <h1>{title}</h1>
-      <p style={{ margin: '20px 0 20px 0' }}>{children}</p>
+      <HeadingTag>{title}</HeadingTag>
+      <p>{children}</p>
     </>
   )
 }

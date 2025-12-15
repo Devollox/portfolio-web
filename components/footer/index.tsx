@@ -1,3 +1,4 @@
+import Link from '@components/link'
 import { useTheme } from 'next-themes'
 import { useEffect, useMemo, useState } from 'react'
 import styles from './footer.module.scss'
@@ -147,7 +148,9 @@ const Footer = ({ isHome = false }: FooterProps) => {
               <span>Ⓓ</span>
             </button>
             <div>
-              <p className={styles.footer_title}>Devollox</p>
+              <p className={styles.footer_title}>
+                <Link href={'/developer'}>Devollox</Link>
+              </p>
               <p className={styles.footer_tagline}>
                 Builder. Performance. Solver.
               </p>
