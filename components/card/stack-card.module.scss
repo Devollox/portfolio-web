@@ -10,6 +10,7 @@
   overflow: hidden;
   z-index: 0;
   background-color: var(--bg);
+  pointer-events: none;
 }
 
 .wrapper::after {
@@ -18,7 +19,6 @@
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  pointer-events: none;
   z-index: -1;
   left: var(--mouse-x);
   top: var(--mouse-y);
