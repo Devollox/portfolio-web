@@ -10,7 +10,6 @@ import { subscribeTotalVisitors } from 'service/firebase'
 
 const AboutPage = () => {
   const [totalVisitors, setTotalVisitors] = useState(0)
-  const [hoveredCard, setHoveredCard] = useState(false)
 
   useEffect(() => {
     const unsubscribe = subscribeTotalVisitors(value => {
@@ -52,3 +51,4 @@ const AboutPage = () => {
 }
 
 export default AboutPage
+
