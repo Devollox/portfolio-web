@@ -100,7 +100,7 @@ const ListIndex = ({
 
   return (
     <>
-      <ul style={{ margin: '0' }}>
+      <ul style={{ margin: '0', paddingLeft: '20px' }}>
         <li className={styles.list}>
           <button
             type="button"
@@ -114,7 +114,10 @@ const ListIndex = ({
             {' '}
             {selection}{' '}
           </span>
-          <span style={{ color: 'var(--colors-secondary)' }}>
+          <span
+            className={styles.description}
+            style={{ color: 'var(--colors-secondary)' }}
+          >
             {description}
           </span>
         </li>
