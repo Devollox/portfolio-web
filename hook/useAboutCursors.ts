@@ -47,7 +47,10 @@ export const useAboutCursors = () => {
           ...value
         }))
 
-        const filtered = list.filter(item => item.id !== userIdRef.current)
+        const now = Date.now()
+        const filtered = list
+          .filter(item => item.id !== userIdRef.current)
+          .filter(c => now - (c.lastSeen ?? 0) < 180000)
 
         setOthers(filtered)
       }
