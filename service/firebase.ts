@@ -257,7 +257,6 @@ export const filterActiveCursors = (
   cursors: CursorWithId[],
   selfId: string | null
 ): CursorWithId[] => {
-  const now = Date.now()
   return cursors
     .filter(item => item.id !== selfId)
 }
@@ -331,5 +330,6 @@ export const subscribePopularUseTools = (
   })
   return unsubscribe
 }
+
 
 
