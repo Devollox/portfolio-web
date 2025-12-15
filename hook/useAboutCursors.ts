@@ -47,7 +47,6 @@ export const useAboutCursors = () => {
           ...value
         }))
 
-        const now = Date.now()
         const filtered = list
           .filter(item => item.id !== userIdRef.current)
 
