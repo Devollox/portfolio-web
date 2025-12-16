@@ -8,7 +8,12 @@
       "$room": {
         "$userId": {
           ".write": true,
-          ".validate": "newData.hasChildren(['name', 'color', 'x', 'y', 'lastSeen'])"
+          ".validate": "newData.hasChildren(['lastSeen']) &&
+            (!newData.child('name').exists() || newData.child('name').isString()) &&
+            (!newData.child('color').exists() || newData.child('color').isString()) &&
+            (!newData.child('x').exists() || newData.child('x').isNumber()) &&
+            (!newData.child('y').exists() || newData.child('y').isNumber()) &&
+            (!newData.child('state').exists() || newData.child('state').val() === 'active' || newData.child('state').val() === 'idle')"
         }
       }
     },
@@ -17,16 +22,14 @@
       ".read": true,
       "$sigId": {
         ".write": true,
-        ".validate": "
-          newData.hasChildren(['name', 'signature', 'timestamp']) &&
+        ".validate": "newData.hasChildren(['name', 'signature', 'timestamp']) &&
           newData.child('name').isString() &&
           newData.child('name').val().length > 0 &&
           newData.child('signature').isString() &&
           newData.child('signature').val().length > 0 &&
-          newData.child('timestamp').isString()
-        "
+          newData.child('timestamp').isString()"
       },
-      ".indexOn": ["name"]
+      ".indexOn": ["name", "timestamp"]
     },
 
     "uses_reactions": {
@@ -56,5 +59,6 @@
     }
   }
 }
+
 
 ```
