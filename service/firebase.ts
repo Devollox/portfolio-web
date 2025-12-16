@@ -46,6 +46,7 @@ export type CursorData = {
   color?: string
   name?: string
   lastSeen?: number
+  state?: 'active' | 'idle'
   [key: string]: unknown
 }
 
@@ -65,6 +66,7 @@ export type CursorWithId = {
   x?: number
   y?: number
   lastSeen?: number
+  state?: 'active' | 'idle'
 }
 
 const appConfig: FirebaseEnvConfig = {
@@ -257,8 +259,7 @@ export const filterActiveCursors = (
   cursors: CursorWithId[],
   selfId: string | null
 ): CursorWithId[] => {
-  return cursors
-    .filter(item => item.id !== selfId)
+  return cursors.filter(item => item.id !== selfId)
 }
 
 export const subscribeCursors = (
@@ -330,6 +331,3 @@ export const subscribePopularUseTools = (
   })
   return unsubscribe
 }
-
-
-
