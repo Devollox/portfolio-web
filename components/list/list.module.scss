@@ -4,10 +4,12 @@
 }
 
 .list {
+  pointer-events: none;
   list-style: none;
   margin-bottom: 5px;
 
   button {
+    pointer-events: auto;
     background-color: transparent;
   }
 
@@ -278,6 +280,7 @@
 }
 
 .title_block {
+  pointer-events: none;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   opacity: 0.85;
@@ -285,6 +288,7 @@
 }
 
 .list_badge {
+  pointer-events: none;
   padding: 2px 6px;
   border: 1px solid #ffffff14;
   border-radius: var(--radius);
