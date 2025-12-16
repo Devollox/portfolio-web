@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   CursorData,
+  CursorWithId,
   filterActiveCursors,
   removeCursor,
   subscribeCursors,
@@ -10,6 +11,7 @@ import {
 } from 'service/firebase'
 
 const ROOM = 'about'
+const IDLE_TIMEOUT_MS = 15000
 
 const randomColor = (): string => {
   const colors = ['#ff4b81', '#4bc0ff', '#7fff4b', '#ffd54b', '#b54bff']
@@ -22,6 +24,7 @@ type CursorRaw = {
   x?: number
   y?: number
   lastSeen?: number
+  state?: 'active' | 'idle'
 }
 
 type Cursor = CursorData & { id: string }
@@ -31,6 +34,7 @@ export const useAboutCursors = () => {
   const userIdRef = useUserId()
   const [others, setOthers] = useState<Cursor[]>([])
   const colorRef = useRef<string>(randomColor())
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const unsubscribe = subscribeCursors(
@@ -41,17 +45,16 @@ export const useAboutCursors = () => {
           return
         }
 
-        const list: Cursor[] = Object.entries(data).map(([id, value]) => ({
-          id,
-          ...value
-        }))
-
-        const filtered = filterActiveCursors(
-          list,
-          userIdRef.current
+        const list: CursorWithId[] = Object.entries(data).map(
+          ([id, value]) => ({
+            id,
+            ...value
+          })
         )
 
-        setOthers(filtered)
+        const filtered = filterActiveCursors(list, userIdRef.current)
+
+        setOthers(filtered as Cursor[])
       }
     )
 
@@ -62,6 +65,17 @@ export const useAboutCursors = () => {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
+
+    const setIdleLater = () => {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
+
+      idleTimerRef.current = setTimeout(() => {
+        if (!userIdRef.current) return
+        updateCursor(ROOM, userIdRef.current, {
+          state: 'idle'
+        })
+      }, IDLE_TIMEOUT_MS)
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!userIdRef.current) return
@@ -82,8 +96,11 @@ export const useAboutCursors = () => {
         name,
         color: colorRef.current,
         x,
-        y
+        y,
+        state: 'active'
       })
+
+      setIdleLater()
     }
 
     const handleBeforeUnload = () => {
@@ -99,11 +116,13 @@ export const useAboutCursors = () => {
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('beforeunload', handleBeforeUnload)
     window.addEventListener('pagehide', handlePageHide)
+    setIdleLater()
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('beforeunload', handleBeforeUnload)
       window.removeEventListener('pagehide', handlePageHide)
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
       if (userIdRef.current) {
         removeCursor(ROOM, userIdRef.current)
       }
