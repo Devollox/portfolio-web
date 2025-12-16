@@ -6,8 +6,13 @@
 .list {
   list-style: none;
   margin-bottom: 5px;
+
   button {
-    background-color: var(--bg);
+    background-color: transparent;
+  }
+
+  button > a:hover {
+    color: var(--gray);
   }
 }
 
@@ -30,11 +35,15 @@
 
 .ul {
   letter-spacing: 0.08em;
-  font-size: .85rem;
+  font-size: 0.85rem;
   border-bottom: 0.5px solid var(--fg);
   color: var(--fg);
   text-decoration: none;
-  transition: opacity var(--transitions-duration) ease-in-out;
+  transition: border-bottom 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    border-bottom: 0.5px solid var(--gray);
+  }
 }
 
 .title_btn:hover .ul {
@@ -79,7 +88,6 @@
   align-items: flex-end;
   justify-content: center;
   padding: 24px 16px 32px;
-  z-index: 50;
 }
 
 .modal {
@@ -93,6 +101,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  z-index: 9999;
 }
 
 .modal_header {
@@ -152,9 +161,8 @@
 }
 
 .checkbox_btn.checkbox_checked {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: var(--glow-soft);
-  color: var(--fg);
+  background: var(--glow-color);
+  border-color: var(--glow-color);
 }
 
 .checkbox_btn:disabled {
@@ -185,7 +193,7 @@
   border-color: var(--glow-soft);
 }
 
-.checkbox_btn.checkbox_checked .checkbox {
+.checkbox_btn.checkbox_checked {
   background: var(--glow-color);
   border-color: var(--glow-color);
 }
@@ -291,6 +299,48 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
+  margin: 10px auto 0;
+  margin-top: 30px;
+  border-radius: var(--inline-radius);
+  border: 1px solid var(--lighter-gray);
+  background-color: var(--bg);
+  gap: 0.9rem;
+  flex-direction: column;
+  padding: 0.9rem 1.1rem 1.05rem;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.list_section::after {
+  content: '';
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  left: var(--mouse-x);
+  top: var(--mouse-y);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    var(--glow-color, #6b4bff) 0%,
+    transparent 60%
+  );
+  filter: blur(22px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.list_section:hover::after {
+  opacity: 0.55;
+}
+
+.list_glow_content {
+  position: relative;
 }
 
 .description {
