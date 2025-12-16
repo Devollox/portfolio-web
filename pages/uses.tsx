@@ -50,21 +50,6 @@ const UsesPage = ({}: Props) => {
     }))
 
     return (
-      <div
-        style={{
-          margin: '10px auto 0',
-          borderRadius: 'var(--inline-radius)',
-          border: '1px solid var(--lighter-gray)',
-          backgroundColor: 'var(--bg)',
-          gap: '0.9rem',
-          flexDirection: 'column',
-          marginTop: '30px',
-          padding: '0.9rem 1.1rem 1.05rem',
-          display: 'flex',
-          position: 'relative',
-          overflow: 'hidden'
-        }}
-      >
         <List listTitle={title} badge={badge}>
           {items.map((entry, index) => (
             <ListIndex
@@ -78,7 +63,6 @@ const UsesPage = ({}: Props) => {
             />
           ))}
         </List>
-      </div>
     )
   }
 
