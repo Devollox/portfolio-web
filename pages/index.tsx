@@ -5,7 +5,6 @@ import getPosts from '@lib/get-posts'
 import generateRssFeed from '@lib/rss'
 import { ArrowRight } from 'lucide-react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { useEffect, useRef } from 'react'
 
 export const getStaticProps: GetStaticProps<{ data: {} }> = async () => {
   await getPosts()
@@ -16,29 +15,8 @@ export const getStaticProps: GetStaticProps<{ data: {} }> = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
 const HomePage = ({}: Props) => {
-  const scrollRef = useRef<HTMLSpanElement | null>(null)
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'auto' })
-    }
-
-    const style = document.createElement('style')
-    style.innerHTML = `body { overflow: hidden; }`
-    document.head.appendChild(style)
-
-    const timeoutId = setTimeout(() => {
-      if (style.parentNode) style.parentNode.removeChild(style)
-    }, 2500)
-
-    return () => {
-      clearTimeout(timeoutId)
-      if (style.parentNode) style.parentNode.removeChild(style)
-    }
-  }, [])
-
   return (
-    <span ref={scrollRef} className={styles.wrapper_home}>
+    <span className={styles.wrapper_home}>
       <Page
         description="Hello, my name is Devollox, and I am a programmer who values creativity and optimization."
         variant="home"
