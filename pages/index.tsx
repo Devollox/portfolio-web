@@ -6,7 +6,6 @@ import generateRssFeed from '@lib/rss'
 import { ArrowRight } from 'lucide-react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useEffect, useRef } from 'react'
-import RenderBackdropAnimation from '../lib/render-backdrop'
 
 export const getStaticProps: GetStaticProps<{ data: {} }> = async () => {
   await getPosts()
@@ -44,7 +43,6 @@ const HomePage = ({}: Props) => {
         description="Hello, my name is Devollox, and I am a programmer who values creativity and optimization."
         variant="home"
       >
-        {/* <RenderBackdropAnimation /> */}
         <div className={styles.wrapper_main}>
           <div className={styles.wrapper_text}>
             <h1>Devollox</h1>
