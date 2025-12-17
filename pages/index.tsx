@@ -44,7 +44,7 @@ const HomePage = ({}: Props) => {
         description="Hello, my name is Devollox, and I am a programmer who values creativity and optimization."
         variant="home"
       >
-        <RenderBackdropAnimation />
+        {/* <RenderBackdropAnimation /> */}
         <div className={styles.wrapper_main}>
           <div className={styles.wrapper_text}>
             <h1>Devollox</h1>
