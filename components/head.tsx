@@ -64,7 +64,7 @@ const Head = ({
       <link
         rel="icon"
         type="image/svg+xml"
-        href={isDark ? '/favicons/white-fav.png' : '/favicons/dark-fav.png'}
+        href={isDark ? '/favicons/white-fav.webp' : '/favicons/dark-fav.webp'}
         key="dynamic-favicon"
       />
       {children}
