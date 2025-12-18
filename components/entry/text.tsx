@@ -2,7 +2,7 @@ import Link from '@components/link'
 import CountUp from '@lib/count-up'
 import cn from 'classnames'
 import { Eye } from 'lucide-react'
-import { memo, useEffect, useState } from 'react'
+import { MouseEvent, memo, useEffect, useState } from 'react'
 import { subscribeVisitorCount } from '../../service/firebase'
 import styles from './text.module.scss'
 
@@ -38,8 +38,17 @@ const TextEntry = ({
     }
   }, [slug])
 
+  const handleMouseMove = (e: MouseEvent<HTMLLIElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
+  }
+
   return (
-    <li className={styles.item}>
+    <li className={styles.item} onMouseMove={handleMouseMove}>
       <Link
         href={href}
         as={as}
