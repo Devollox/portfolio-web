@@ -8,7 +8,6 @@ import Router from 'next/router'
 import nprogress from 'nprogress'
 import { useEffect } from 'react'
 import { incrementTotalVisitors } from '../service/firebase'
-import '../styles/terrarian.scss'
 
 const start = debounce(nprogress.start, 500)
 
