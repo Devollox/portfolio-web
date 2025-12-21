@@ -351,3 +351,29 @@
   font-size: 0.85rem;
   text-transform: lowercase;
 }
+.link_btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--colors-secondary);
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+    color 0.18s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-color: var(--glow-soft);
+    color: var(--fg);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
