@@ -35,7 +35,7 @@ const AboutPage = () => {
       <QuoteHero
         badgeText={'            still building.'}
         name={'Devollox'}
-        subtitle={'                Builder. Performance. Solver.'}
+        subtitle={'                Builder. Optimizer. Solver.'}
         text={`If a detail feels invisible, it is probably finished. If it catches
             your eye, it is probably an experiment.`}
       />
@@ -51,6 +51,7 @@ const AboutPage = () => {
 }
 
 export default AboutPage
+
 
 
 
