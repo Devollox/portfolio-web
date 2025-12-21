@@ -1,9 +1,9 @@
 import CountUp from '@lib/count-up'
 import { MouseEvent, useEffect, useState } from 'react'
 import { subscribeTotalVisitors } from 'service/firebase'
-import styles from './by-numbers-form.module.scss'
+import styles from './highlights-form.module.scss'
 
-type ByNumbersProps = {
+type HighlightsProps = {
   initialTotalVisitors?: number
 }
 
@@ -16,7 +16,7 @@ type Stat =
     }
   | { num: number; label: string; isCountUp: true; icon?: React.ReactNode }
 
-const ByNumbers = ({ initialTotalVisitors = 0 }: ByNumbersProps) => {
+const Highlights = ({ initialTotalVisitors = 0 }: ByNumbersProps) => {
   const [totalVisitors, setTotalVisitors] = useState<number>(
     initialTotalVisitors
   )
@@ -45,7 +45,7 @@ const ByNumbers = ({ initialTotalVisitors = 0 }: ByNumbersProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>By Numbers</h2>
+      <h2 className={styles.title}>Highlights</h2>
       <div className={styles.grid}>
         {stats.map((stat, idx) => (
           <div key={idx} className={styles.card} onMouseMove={handleMouseMove}>
@@ -66,3 +66,4 @@ const ByNumbers = ({ initialTotalVisitors = 0 }: ByNumbersProps) => {
 }
 
 export default ByNumbers
+
