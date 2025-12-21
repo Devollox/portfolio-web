@@ -25,7 +25,7 @@ const AboutPage = () => {
       <AboutCursorLayer />
 
       <div>
-        <Information title="Builder. Performance. Solver." as="h1">
+        <Information title="Builder. Optimizer. Solver." as="h1">
           Hello, my name is <strong>Devollox</strong>, and I am a programmer who
           values <strong>creativity</strong> and <strong>optimization</strong>.
           This website is my place to <strong>experiment</strong> with modern
@@ -51,6 +51,7 @@ const AboutPage = () => {
 }
 
 export default AboutPage
+
 
 
 
