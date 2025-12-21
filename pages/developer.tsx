@@ -76,7 +76,7 @@ const DeveloperPage = () => {
         <QuoteHero
           badgeText={'still building.'}
           name={'Devollox'}
-          subtitle={'Builder. Performance. Solver.'}
+          subtitle={'Builder. Optimizer. Solver.'}
           text={`
                         If something feels smooth here, it&apos;s on purpose. If something
             feels a bit odd, it&apos;s probably being experimented on.
@@ -121,3 +121,4 @@ const DeveloperPage = () => {
 }
 
 export default DeveloperPage
+
