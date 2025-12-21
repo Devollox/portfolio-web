@@ -1,5 +1,5 @@
 import AboutCursorLayer from '@components/cursor-layer/about-cursor-layer'
-import ByNumbers from '@components/form/by-numbers-form'
+import Highlights from '@components/form/highlights-form'
 import Information from '@components/information'
 import Page from '@components/page'
 import Quote from '@components/quote'
@@ -39,7 +39,7 @@ const AboutPage = () => {
         text={`If a detail feels invisible, it is probably finished. If it catches
             your eye, it is probably an experiment.`}
       />
-      <ByNumbers initialTotalVisitors={totalVisitors} />
+      <Highlights initialTotalVisitors={totalVisitors} />
       <UsedByDevollox />
       <Quote
         title="On building things."
@@ -51,3 +51,4 @@ const AboutPage = () => {
 }
 
 export default AboutPage
+
