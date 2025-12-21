@@ -100,6 +100,26 @@ const ListIndex = ({
     setModalOpen(false)
   }
 
+  const getLinkLabel = () => {
+    if (!link) return ''
+
+    if (
+      section === 'computer' ||
+      section === 'desk' ||
+      section === 'mouse' ||
+      section === 'keyboard' ||
+      section === 'microphone'
+    ) {
+      return 'Buy on AliExpress'
+    }
+
+    if (section === 'coding' || section === 'apps' || section === 'services') {
+      return 'Visit website'
+    }
+
+    return 'Open link'
+  }
+
   return (
     <>
       <ul style={{ margin: '0', paddingLeft: '20px' }}>
@@ -143,7 +163,7 @@ const ListIndex = ({
                   rel="noopener noreferrer"
                   className={styles.link_btn}
                 >
-                  Buy on AliExpress
+                  {getLinkLabel()}
                 </a>
               )}
               <button
