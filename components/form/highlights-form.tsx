@@ -16,7 +16,7 @@ type Stat =
     }
   | { num: number; label: string; isCountUp: true; icon?: React.ReactNode }
 
-const Highlights = ({ initialTotalVisitors = 0 }: ByNumbersProps) => {
+const Highlights = ({ initialTotalVisitors = 0 }: HighlightsProps) => {
   const [totalVisitors, setTotalVisitors] = useState<number>(
     initialTotalVisitors
   )
@@ -66,4 +66,5 @@ const Highlights = ({ initialTotalVisitors = 0 }: ByNumbersProps) => {
 }
 
 export default ByNumbers
+
 
