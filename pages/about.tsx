@@ -21,7 +21,7 @@ const AboutPage = () => {
   }, [])
 
   return (
-    <Page description="Builder. Performance. Solver." title="About">
+    <Page description="Builder. Optimizer. Solver." title="About">
       <AboutCursorLayer />
 
       <div>
@@ -51,5 +51,6 @@ const AboutPage = () => {
 }
 
 export default AboutPage
+
 
 
