@@ -65,6 +65,7 @@ const Highlights = ({ initialTotalVisitors = 0 }: HighlightsProps) => {
   )
 }
 
-export default ByNumbers
+export default Highlights
+
 
 
