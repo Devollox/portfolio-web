@@ -24,6 +24,7 @@ type ListIndexProps = {
   index: number
   section: string
   allTools: Tool[]
+  link?: string
 }
 
 const ListIndex = ({
@@ -32,7 +33,8 @@ const ListIndex = ({
   selection,
   index,
   section,
-  allTools
+  allTools,
+  link
 }: ListIndexProps) => {
   const [usingCount, setUsingCount] = useState(0)
   const [checked, setChecked] = useState(false)
@@ -134,6 +136,16 @@ const ListIndex = ({
             {description && <p className={styles.modal_desc}>{description}</p>}
 
             <div className={styles.modal_actions}>
+              {link && (
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link_btn}
+                >
+                  Buy on AliExpress
+                </a>
+              )}
               <button
                 type="button"
                 className={`${styles.checkbox_btn} ${
