@@ -43,7 +43,7 @@ const AboutPage = () => {
       <UsedByDevollox />
       <Quote
         title="On building things."
-        quote="The best way to understand a system is to create it, break it down, and then improve what is left. That`s what this website is built on."
+        quote="I build web applications on Next.js and Firebase with a focus on UX and performance. This site is my playground for experiments."
         author="Devollox"
       />
     </Page>
@@ -51,4 +51,5 @@ const AboutPage = () => {
 }
 
 export default AboutPage
+
 
