@@ -155,7 +155,7 @@ const Footer = ({ isHome = false }: FooterProps) => {
                 <Link href={'/developer'}>Devollox</Link>
               </p>
               <p className={styles.footer_tagline}>
-                Builder. Performance. Solver.
+                Builder. Optimizer. Solver.
               </p>
             </div>
           </div>
