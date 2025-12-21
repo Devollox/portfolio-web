@@ -81,9 +81,12 @@ type SocialLink = {
   href: string
 }
 
-const SOCIAL_LINKS: SocialLink[] = [
+const CODE_LINKS: SocialLink[] = [
+  { label: 'GitHub', href: 'https://github.com/devollox' }
+]
+
+const ELSEWHERE_LINKS: SocialLink[] = [
   { label: 'Steam', href: 'https://steamcommunity.com/id/Devollox/' },
-  { label: 'GitHub', href: 'https://github.com/devollox' },
   { label: 'Reddit', href: 'https://www.reddit.com/user/Devollox_/' }
 ]
 
@@ -157,19 +160,41 @@ const Footer = ({ isHome = false }: FooterProps) => {
             </div>
           </div>
 
-          <nav className={styles.footer_links}>
-            {SOCIAL_LINKS.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.footer_link}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+          <div className={styles.footer_links_wrapper}>
+            <div className={styles.footer_links_group}>
+              <span className={styles.footer_links_label}>Code</span>
+              <nav className={styles.footer_links}>
+                {CODE_LINKS.map(link => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.footer_link}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+
+            <div className={styles.footer_links_group}>
+              <span className={styles.footer_links_label}>Elsewhere</span>
+              <nav className={styles.footer_links}>
+                {ELSEWHERE_LINKS.map(link => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.footer_link}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </div>
         </div>
 
         <div className={styles.footer_bottom}>
