@@ -25,7 +25,7 @@ const DeveloperPage = () => {
       >
         <div style={{ flex: '1 1 auto' }}>
           <Information title="Developer of this website." as="h1">
-            Hello, I&apos;m <strong>Devollox</strong>. This page is a small peek
+            Hello, I`m <strong>Devollox</strong>. This page is a small peek
             behind the curtain — how this site is built, why it looks and
             behaves the way it does, and what kind of problems it tries to
             solve.
@@ -67,7 +67,7 @@ const DeveloperPage = () => {
         }}
       >
         <Information title="Why this site exists" as="h2">
-          It&apos;s not just a portfolio. It&apos;s a sandbox to try out
+          It`s not just a portfolio. It`s a sandbox to try out
           patterns, measure how they feel over time and keep the parts that age
           well. Some things ship quickly and get removed just as quickly. Others
           evolve into stable features that feel invisible in the best way
@@ -78,8 +78,8 @@ const DeveloperPage = () => {
           name={'Devollox'}
           subtitle={'Builder. Optimizer. Solver.'}
           text={`
-                        If something feels smooth here, it&apos;s on purpose. If something
-            feels a bit odd, it&apos;s probably being experimented on.
+                        If something feels smooth here, it`s on purpose. If something
+            feels a bit odd, it`s probably being experimented on.
             `}
         />
       </section>
@@ -121,4 +121,5 @@ const DeveloperPage = () => {
 }
 
 export default DeveloperPage
+
 
