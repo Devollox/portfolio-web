@@ -113,3 +113,7 @@ GITHUB_ID=your-github-client-id
 ```
 
 ---
+## Contributing
+
+Contributions are welcome!  
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for details on setup, workflow and what kind of changes fit this project.
