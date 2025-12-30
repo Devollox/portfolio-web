@@ -22,21 +22,22 @@
       ".read": true,
       "$sigId": {
         ".write": true,
-        ".validate": "newData.hasChildren(['name', 'signature', 'timestamp']) &&
+        ".validate": "newData.hasChildren(['name', 'signature', 'timestamp', 'uid']) &&
           newData.child('name').isString() &&
           newData.child('name').val().length > 0 &&
           newData.child('signature').isString() &&
           newData.child('signature').val().length > 0 &&
-          newData.child('timestamp').isString()"
+          newData.child('timestamp').isString() &&
+          newData.child('uid').isString()"
       },
-      ".indexOn": ["name", "timestamp"]
+      ".indexOn": ["name", "timestamp", "uid"]
     },
 
     "uses_reactions": {
       "$section": {
         "$index": {
           ".read": true,
-          ".write": true,
+          ".write": "newData.exists()",
           ".validate": "newData.isNumber() && newData.val() >= 0"
         }
       }
@@ -45,7 +46,7 @@
     "blog": {
       "$slug": {
         ".read": true,
-        ".write": true,
+        ".write": "newData.exists()",
         ".validate": "newData.isNumber() && newData.val() >= 0"
       }
     },
@@ -53,12 +54,11 @@
     "analytics": {
       "total_visitors": {
         ".read": true,
-        ".write": true,
+        ".write": "newData.exists()",
         ".validate": "newData.isNumber() && newData.val() >= 0"
       }
     }
   }
 }
-
 
 ```
