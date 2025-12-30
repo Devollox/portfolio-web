@@ -373,3 +373,7 @@ button:hover {
     background-color: var(--kbd-bg);
   }
 }
+#bgCanvas {
+  position: absolute;
+  inset: 0;
+}
