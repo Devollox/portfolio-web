@@ -36,6 +36,7 @@ export type Signature = {
   name: string
   signature: string
   timestamp: string
+  uid: string
 }
 
 type RawSignature = Omit<Signature, 'id'>
@@ -78,7 +79,9 @@ const appConfig: FirebaseEnvConfig = {
   messagingSenderId: process.env
     .NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID as string,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID as string,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_MEASUREMENT_ID
+    ? process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_MEASUREMENT_ID
+    : process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 }
 
 export const PAGE_SIZE = 10
@@ -107,13 +110,15 @@ export const incrementVisitorCount = async (slug: string): Promise<void> => {
 
 export const saveSignature = async (
   signatureBase64: string,
-  userName: string
+  userName: string,
+  userId: string
 ): Promise<void> => {
   const signaturesRef = ref(database, 'signatures')
   const payload: RawSignature = {
     name: userName,
     signature: signatureBase64,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    uid: userId
   }
   await push(signaturesRef, payload)
 }
@@ -189,13 +194,9 @@ export const subscribeSignaturesPage = (
   return unsubscribe
 }
 
-export const deleteSignatureByName = async ({
-  name
-}: {
-  name: string
-}): Promise<void> => {
+export const deleteSignatureByUid = async (uid: string): Promise<void> => {
   const signaturesRef = ref(database, 'signatures')
-  const q = query(signaturesRef, orderByChild('name'), equalTo(name))
+  const q = query(signaturesRef, orderByChild('uid'), equalTo(uid))
   const snapshot: DataSnapshot = await get(q)
   if (snapshot.exists()) {
     const raw = snapshot.val() as Record<string, RawSignature>

@@ -8,7 +8,7 @@ import Page from '@components/page'
 import { useSession } from 'next-auth/react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
-  deleteSignatureByName,
+  deleteSignatureByUid,
   getMoreSignatures,
   PAGE_SIZE,
   saveSignature,
@@ -20,6 +20,7 @@ type Signature = {
   name: string
   timestamp: string
   signature: string
+  uid: string
 }
 
 const SignaturePage = () => {
@@ -31,6 +32,7 @@ const SignaturePage = () => {
   const [showForm, setShowForm] = useState(false)
 
   const currentUserName = session?.user?.name ?? null
+  const currentUserId = (session?.user as any)?.id ?? null
 
   useEffect(() => {
     const unsubscribe = subscribeSignaturesPage((list: Signature[]) => {
@@ -51,8 +53,12 @@ const SignaturePage = () => {
 
   const hasUserSignature = useMemo(
     () =>
-      !!(session && signatures.some(sig => sig.name === session.user?.name)),
-    [session, signatures]
+      !!(
+        session &&
+        currentUserId &&
+        signatures.some(sig => sig.uid === currentUserId)
+      ),
+    [session, signatures, currentUserId]
   )
 
   const handleLoadMore = useCallback(async () => {
@@ -84,18 +90,19 @@ const SignaturePage = () => {
     }
   }, [lastSignature, loadingMore])
 
-  const handleDelete = useCallback(async ({ name }: { name: string }) => {
-    await deleteSignatureByName({ name: String(name) })
-  }, [])
+  const handleDelete = useCallback(async () => {
+    if (!currentUserId) return
+    await deleteSignatureByUid(currentUserId)
+  }, [currentUserId])
 
   const handleSaveSignature = useCallback(
     async ({ signature }: { signature: string | { signature: string } }) => {
-      if (!currentUserName) return
+      if (!currentUserName || !currentUserId) return
       const value =
         typeof signature === 'string' ? signature : signature.signature
-      await saveSignature(value, currentUserName)
+      await saveSignature(value, currentUserName, currentUserId)
     },
-    [currentUserName]
+    [currentUserName, currentUserId]
   )
 
   return (
@@ -134,11 +141,7 @@ const SignaturePage = () => {
 
         {session && !showForm && hasUserSignature && !loading && (
           <div style={{ marginLeft: 'auto' }}>
-            <SignaturePrimaryButton
-              onClick={() =>
-                currentUserName && handleDelete({ name: currentUserName })
-              }
-            >
+            <SignaturePrimaryButton onClick={handleDelete}>
               Delete Signature
             </SignaturePrimaryButton>
           </div>

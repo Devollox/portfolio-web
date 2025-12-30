@@ -67,18 +67,17 @@ const DeveloperPage = () => {
         }}
       >
         <Information title="Why this site exists" as="h2">
-          Its not just a portfolio. Its a sandbox to try out
-          patterns, measure how they feel over time and keep the parts that age
-          well. Some things ship quickly and get removed just as quickly. Others
-          evolve into stable features that feel invisible in the best way
-          possible.
+          It=s not just a portfolio. I=s a sandbox to try out patterns, measure
+          how they feel over time and keep the parts that age well. Some things
+          ship quickly and get removed just as quickly. Others evolve into
+          stable features that feel invisible in the best way possible.
         </Information>
         <QuoteHero
           badgeText={'still building.'}
           name={'Devollox'}
           subtitle={'Builder. Optimizer. Solver.'}
           text={`
-                        If something feels smooth here, its on purpose. If something
+            If something feels smooth here, its on purpose. If something
             feels a bit odd, its probably being experimented on.
             `}
         />
@@ -121,6 +120,3 @@ const DeveloperPage = () => {
 }
 
 export default DeveloperPage
-
-
-
