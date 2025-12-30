@@ -2,6 +2,7 @@ import Command from '@components/command'
 import Page from '@components/page'
 import styles from '@components/page/home-page.module.scss'
 import getPosts from '@lib/get-posts'
+import RenderBackdropAnimation from '@lib/render-backdrop'
 import generateRssFeed from '@lib/rss'
 import { ArrowRight } from 'lucide-react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
@@ -17,6 +18,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>
 const HomePage = ({}: Props) => {
   return (
     <span className={styles.wrapper_home}>
+      <RenderBackdropAnimation />
       <Page
         description="Hello, my name is Devollox, and I am a programmer who values creativity and optimization."
         variant="home"
