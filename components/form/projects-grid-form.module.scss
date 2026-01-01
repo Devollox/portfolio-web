@@ -1,0 +1,73 @@
+.wrapper {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.title {
+  margin-bottom: 32px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  border-radius: var(--inline-radius);
+  border: 1px solid var(--lighter-gray);
+  background-color: var(--bg);
+  color: var(--fg);
+  padding: 18px 18px 20px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  left: var(--mouse-x);
+  top: var(--mouse-y);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 60%);
+  filter: blur(22px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.card:hover::after {
+  opacity: 0.5;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  opacity: 0.75;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.stack {
+  font-size: 12px;
+  opacity: 0.7;
+}
