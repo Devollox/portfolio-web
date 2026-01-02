@@ -53,6 +53,7 @@ const QuoteHero = ({
                 width={40}
                 height={80}
                 className={styles.avatar}
+                priority
               />
             </div>
           </div>
