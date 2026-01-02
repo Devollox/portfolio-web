@@ -1,7 +1,6 @@
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
-import { admin } from '../../../lib/firebase-admin'
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,12 +15,9 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, account, user }) {
-      if (account && user) {
+      if (account) {
         token.accessToken = account.access_token
         token.id = (user as any)?.id ?? token.sub
-        token.firebaseToken = await admin
-          .auth()
-          .createCustomToken(token.id as string)
       }
       return token
     },
@@ -30,7 +26,6 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         ;(session.user as any).id = token.id ?? token.sub
       }
-      ;(session as any).firebaseToken = token.firebaseToken
       return session
     }
   },
@@ -39,17 +34,7 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt'
-  },
-  debug: true
-}
-
-const handler = NextAuth(authOptions)
-
-export default async function auth(req: any, res: any) {
-  try {
-    return await handler(req, res)
-  } catch (err) {
-    console.error('NEXTAUTH ERROR', err)
-    throw err
   }
 }
+
+export default NextAuth(authOptions)
