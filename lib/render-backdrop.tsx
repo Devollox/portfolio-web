@@ -37,7 +37,7 @@ export default function RenderBackdropAnimation() {
     const isDark = resolvedTheme === 'dark'
     const starColor = isDark ? '#fff' : '#000'
     const bgColor = isDark ? '#000' : '#fff'
-    console.log(isDark)
+
     class Star implements DrawableEntity {
       size: number
       speed: number
@@ -146,3 +146,4 @@ export default function RenderBackdropAnimation() {
 
   return <canvas id="bgCanvas" />
 }
+
