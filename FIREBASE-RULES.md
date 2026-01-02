@@ -17,18 +17,29 @@
         }
       }
     },
-
+      
     "signatures": {
       ".read": true,
       "$sigId": {
-        ".write": true,
-        ".validate": "newData.hasChildren(['name', 'signature', 'timestamp', 'uid']) &&
-          newData.child('name').isString() &&
-          newData.child('name').val().length > 0 &&
-          newData.child('signature').isString() &&
-          newData.child('signature').val().length > 0 &&
-          newData.child('timestamp').isString() &&
-          newData.child('uid').isString()"
+        ".write": "
+          auth != null && (
+            (!data.exists() && newData.exists() &&
+              newData.child('uid').val() === auth.uid) ||
+            (data.exists() && !newData.exists() &&
+              data.child('uid').val() === auth.uid)
+          )
+        ",
+        ".validate": "
+          !newData.exists() || (
+            newData.hasChildren(['name','signature','timestamp','uid']) &&
+            newData.child('name').isString() &&
+            newData.child('name').val().length > 0 &&
+            newData.child('signature').isString() &&
+            newData.child('signature').val().length > 0 &&
+            newData.child('timestamp').isString() &&
+            newData.child('uid').isString()
+          )
+        "
       },
       ".indexOn": ["name", "timestamp", "uid"]
     },
@@ -60,5 +71,4 @@
     }
   }
 }
-
 ```

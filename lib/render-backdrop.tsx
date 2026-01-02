@@ -146,3 +146,4 @@ export default function RenderBackdropAnimation() {
 
   return <canvas id="bgCanvas" />
 }
+
