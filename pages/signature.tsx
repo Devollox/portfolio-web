@@ -5,9 +5,11 @@ import Form from '@components/form/form'
 import SkeletonForm from '@components/form/skeleton-form'
 import Information from '@components/information'
 import Page from '@components/page'
+import { getAuth, signInWithCustomToken } from 'firebase/auth'
 import { useSession } from 'next-auth/react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
+  app,
   deleteSignatureByUid,
   getMoreSignatures,
   PAGE_SIZE,
@@ -23,6 +25,8 @@ type Signature = {
   uid: string
 }
 
+const auth = getAuth(app)
+
 const SignaturePage = () => {
   const { data: session } = useSession()
   const [signatures, setSignatures] = useState<Signature[]>([])
@@ -33,6 +37,12 @@ const SignaturePage = () => {
 
   const currentUserName = session?.user?.name ?? null
   const currentUserId = (session?.user as any)?.id ?? null
+
+  useEffect(() => {
+    const firebaseToken = (session as any)?.firebaseToken
+    if (!firebaseToken) return
+    signInWithCustomToken(auth, firebaseToken).catch(console.error)
+  }, [session])
 
   useEffect(() => {
     const unsubscribe = subscribeSignaturesPage((list: Signature[]) => {
