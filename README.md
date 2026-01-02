@@ -75,7 +75,16 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-storage-bucket
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
 NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your-measurement-id
+
+
+Firebase Console → Project Settings → Service accounts → Firebase Admin SDK → Generate new private key
+FIREBASE_PROJECT_ID=your-project-id           
+FIREBASE_CLIENT_EMAIL=your-service-account-email  
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
 ```
+
+> Important: `FIREBASE_PRIVATE_KEY` must be a single line with `\n` instead of actual line breaks, otherwise Firebase Admin will not initialize.
+
 ### Firebase Rules
 
 <details>
