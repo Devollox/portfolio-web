@@ -42,4 +42,13 @@ export const authOptions: NextAuthOptions = {
   }
 }
 
-export default NextAuth(authOptions)
+const handler = NextAuth(authOptions)
+
+export default async function auth(req: any, res: any) {
+  try {
+    return await handler(req, res)
+  } catch (err) {
+    console.error('NEXTAUTH ERROR', err)
+    throw err
+  }
+}
