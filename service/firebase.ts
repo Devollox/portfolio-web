@@ -86,7 +86,7 @@ const appConfig: FirebaseEnvConfig = {
 
 export const PAGE_SIZE = 10
 
-const app = initializeApp(appConfig)
+export const app = initializeApp(appConfig)
 const database: Database = getDatabase(app)
 
 export const getVisitorCount = async (slug: string): Promise<VisitorCount> => {
