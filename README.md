@@ -85,6 +85,18 @@ FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY----
 
 > Important: `FIREBASE_PRIVATE_KEY` must be a single line with `\n` instead of actual line breaks, otherwise Firebase Admin will not initialize.
 
+### Firebase and Google redirect
+
+```env
+Local:
+- http://localhost:3000/api/auth/callback/google
+- http://localhost:3000/api/auth/callback/github
+
+Production:
+- https://www.devollox.fun/api/auth/callback/google
+- https://www.devollox.fun/api/auth/callback/github
+```
+
 ### Firebase Rules
 
 <details>
