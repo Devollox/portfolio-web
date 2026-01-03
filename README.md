@@ -122,7 +122,7 @@ Create OAuth applications in Google and GitHub:
 **Setup Steps:**
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/) and create an OAuth client.
-2. Set authorized redirect URIs (e.g., `http://localhost:3000/api/auth/callback` for local development).
+2. Set authorized redirect URIs (e.g., `http://localhost:3000/api/auth/callback/...` for local development).
 3. Copy your `Client ID` and `Client Secret`.
 4. Add these to your `.env.local` file:
 
