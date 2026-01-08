@@ -48,6 +48,7 @@ const Head = ({
       <meta name="twitter:domain" content="devollox.fun" />
       <meta name="twitter:creator" content="@devollox" />
       <meta name="apple-mobile-web-app-title" content="Devollox" />
+      <link rel="canonical" href={BASE_URL} />
       <meta name="author" content="Devollox" />
       <link
         rel="alternate"
