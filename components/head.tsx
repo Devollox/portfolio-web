@@ -27,6 +27,8 @@ const Head = ({
 
   const isDark = activeTheme === 'dark'
 
+  const canonicalUrl = BASE_URL + (path === '/' ? '' : path)
+
   return (
     <NextHead>
       <link
@@ -48,7 +50,7 @@ const Head = ({
       <meta name="twitter:domain" content="devollox.fun" />
       <meta name="twitter:creator" content="@devollox" />
       <meta name="apple-mobile-web-app-title" content="Devollox" />
-      <link rel="canonical" href={BASE_URL} />
+      <link rel="canonical" href={canonicalUrl} />
       <meta name="author" content="Devollox" />
       <link
         rel="alternate"
