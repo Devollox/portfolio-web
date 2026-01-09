@@ -11,10 +11,6 @@
       "src": "/favicons/favicon-192x192.png"
     },
     {
-      "sizes": "150x150",
-      "src": "/favicons/favicon-150x150.png"
-    },
-    {
       "sizes": "32x32",
       "src": "/favicons/favicon-32x32.png"
     },
