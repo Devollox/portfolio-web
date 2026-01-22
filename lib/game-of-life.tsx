@@ -16,6 +16,7 @@ export function GameOfLife() {
     canvas.style.left = '0'
     canvas.style.border = 'none'
     canvas.style.zIndex = '0'
+    canvas.style.pointerEvents = 'auto'
 
     const bg =
       getComputedStyle(document.documentElement).getPropertyValue(
@@ -89,14 +90,56 @@ export function GameOfLife() {
       }
     }
 
+    const spawnAt = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect()
+      const baseX = Math.floor((e.clientX - rect.left) / cellSize)
+      const baseY = Math.floor((e.clientY - rect.top) / cellSize)
+      if (baseX < 0 || baseX >= widthCells || baseY < 0 || baseY >= heightCells)
+        return
+
+      const radius = 3
+      const count = 20
+
+      for (let i = 0; i < count; i++) {
+        const dx = Math.floor((Math.random() - 0.5) * 2 * radius)
+        const dy = Math.floor((Math.random() - 0.5) * 2 * radius)
+        const cx = (baseX + dx + widthCells) % widthCells
+        const cy = (baseY + dy + heightCells) % heightCells
+        firstGeneration[cx][cy] = 1
+      }
+    }
+
+    let drawing = false
+
+    const handleMouseDown = (e: MouseEvent) => {
+      drawing = true
+      spawnAt(e)
+    }
+
+    const handleMouseUp = () => {
+      drawing = false
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!drawing) return
+      spawnAt(e)
+    }
+
     root.appendChild(canvas)
 
     const intervalId = setInterval(createNewGeneration, 100)
     const refreshId = setInterval(refreshPlatform, 60000 * 30)
 
+    canvas.addEventListener('mousedown', handleMouseDown)
+    window.addEventListener('mouseup', handleMouseUp)
+    canvas.addEventListener('mousemove', handleMouseMove)
+
     return () => {
       clearInterval(intervalId)
       clearInterval(refreshId)
+      canvas.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('mouseup', handleMouseUp)
+      canvas.removeEventListener('mousemove', handleMouseMove)
       if (canvas.parentNode) {
         canvas.parentNode.removeChild(canvas)
       }
