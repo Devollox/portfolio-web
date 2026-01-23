@@ -1,3 +1,4 @@
+import GithubActivity from '@components/activity-grid/github-activity'
 import AboutCursorLayer from '@components/cursor-layer/about-cursor-layer'
 import Highlights from '@components/form/highlights-form'
 import ProjectsGrid from '@components/form/projects-grid-form'
@@ -60,6 +61,7 @@ const AboutPage = () => {
       />
       <ProjectsGrid projects={projects} />
       <Highlights initialTotalVisitors={totalVisitors} />
+      <GithubActivity />
       <UsedByDevollox />
       <Quote
         title="On building things."

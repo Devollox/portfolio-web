@@ -1,0 +1,64 @@
+.wrapper {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.title {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.loading {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.skeletonCard {
+  border-radius: var(--inline-radius);
+  border: 1px solid var(--lighter-gray);
+  background: var(--bg);
+  padding: 20px 20px 16px;
+  overflow: hidden;
+}
+
+.skeletonGrid {
+  width: 100%;
+  height: 125px;
+  border-radius: 6px;
+  background: var(--glow-white-rgb);
+  background-size: 200% 100%;
+  animation: github-activity-shimmer 1.1s infinite linear;
+}
+
+.skeletonFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.skeletonDotRow {
+  display: flex;
+  gap: 4px;
+}
+
+.skeletonDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: rgba(var(--glow-white-rgb), 0.12);
+}
+
+.skeletonYearTabs {
+  display: flex;
+  gap: 6px;
+}
+
+.skeletonTab {
+  width: 40px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(var(--glow-white-rgb), 0.08);
+}
