@@ -114,6 +114,17 @@ const buildWeeks = (days: ActivityDay[]) => {
   return { weeks, monthLabels }
 }
 
+const formatDateLabel = (iso: string, count: number) => {
+  const d = new Date(iso)
+  const day = d
+    .getDate()
+    .toString()
+    .padStart(2, '0')
+  const month = MONTH_NAMES[d.getMonth()]
+  const year = d.getFullYear()
+  return `${day} ${month} ${year} • ${count} activities`
+}
+
 const ActivityGrid = ({
   title = 'Activity',
   days,
@@ -127,6 +138,13 @@ const ActivityGrid = ({
   const viewportRef = useRef<HTMLDivElement | null>(null)
   const trackRef = useRef<HTMLDivElement | null>(null)
 
+  const [hoveredDay, setHoveredDay] = useState<{
+    date: string
+    count: number
+    x: number
+    y: number
+  } | null>(null)
+
   useEffect(() => {
     const viewportWidth = viewportRef.current?.clientWidth ?? 0
     const trackWidth = trackRef.current?.scrollWidth ?? 0
@@ -135,11 +153,10 @@ const ActivityGrid = ({
     setOffset(prev => Math.min(prev, max))
   }, [weeks.length])
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+  const handleMouseMoveCard = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
-
     e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
     e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
   }
@@ -154,97 +171,156 @@ const ActivityGrid = ({
     setOffset(prev => Math.min(prev + step, maxOffsetPx))
   }
 
+  const handleCellEnter = (e: MouseEvent<HTMLDivElement>, day: ActivityDay) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const outerRect = (e.currentTarget.closest(
+      `.${styles.outer}`
+    ) as HTMLDivElement | null)?.getBoundingClientRect()
+
+    const base_left = outerRect ? outerRect.left : 0
+    const base_top = outerRect ? outerRect.top : 0
+
+    const x = rect.left - base_left + rect.width / 2
+    const y = rect.top - base_top - 6
+
+    setHoveredDay({
+      date: day.date,
+      count: day.count,
+      x,
+      y
+    })
+  }
+
+  const handleCellLeave = () => {
+    setHoveredDay(null)
+  }
+
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>{title}</h2>
 
-      <div className={styles.card} onMouseMove={handleMouseMove}>
-        <div className={styles.sliderHeader}>
-          <div className={styles.sliderControls}>
-            <button
-              type="button"
-              className={styles.sliderButton}
-              onClick={handlePrev}
-              disabled={offset === 0}
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              className={styles.sliderButton}
-              onClick={handleNext}
-              disabled={offset >= maxOffsetPx}
-            >
-              ›
-            </button>
-          </div>
-        </div>
-
-        <div className={styles.viewport} ref={viewportRef}>
+      <div className={styles.outer}>
+        {hoveredDay && (
           <div
-            className={styles.track}
-            ref={trackRef}
-            style={{ transform: `translateX(-${offset}px)` }}
+            className={styles.badge}
+            style={{
+              left: hoveredDay.x,
+              top: hoveredDay.y
+            }}
           >
-            <div className={styles.monthRow}>
-              {monthLabels.map(label => (
-                <span
-                  key={`${label.index}-${label.month}`}
-                  className={styles.monthLabel}
-                  style={{ gridColumnStart: label.index + 1 }}
-                >
-                  {MONTH_NAMES[label.month]}
-                </span>
-              ))}
-            </div>
-
-            <div className={styles.grid}>
-              {weeks.map((week, weekIndex) => (
-                <div key={weekIndex} className={styles.weekColumn}>
-                  {week.map(day => {
-                    const level = getLevel(day.count)
-                    return (
-                      <div
-                        key={day.date}
-                        className={`${styles.cell} ${styles[`level${level}`]}`}
-                        aria-label={`${day.date}: ${day.count} activities`}
-                      />
-                    )
-                  })}
-                </div>
-              ))}
-            </div>
+            {formatDateLabel(hoveredDay.date, hoveredDay.count)}
           </div>
-        </div>
+        )}
 
-        <div className={styles.footer}>
-          <div className={styles.legend}>
-            <span className={styles.legendLabel}>Less</span>
-            <div className={styles.legendCells}>
-              <span className={`${styles.cell} ${styles.level0}`} />
-              <span className={`${styles.cell} ${styles.level1}`} />
-              <span className={`${styles.cell} ${styles.level2}`} />
-              <span className={`${styles.cell} ${styles.level3}`} />
-              <span className={`${styles.cell} ${styles.level4}`} />
-            </div>
-            <span className={styles.legendLabel}>More</span>
-          </div>
-
-          <div className={styles.yearTabs}>
-            {years.map(year => (
+        <div className={styles.card} onMouseMove={handleMouseMoveCard}>
+          <div className={styles.slider_header}>
+            <div className={styles.slider_controls}>
               <button
-                key={year}
                 type="button"
-                className={
-                  year === activeYear
-                    ? `${styles.yearButton} ${styles.yearButtonActive}`
-                    : styles.yearButton
-                }
-                onClick={() => onYearChange(year)}
+                className={styles.slider_button}
+                onClick={handlePrev}
+                disabled={offset === 0}
               >
-                {year}
+                ‹
               </button>
-            ))}
+              <button
+                type="button"
+                className={styles.slider_button}
+                onClick={handleNext}
+                disabled={offset >= maxOffsetPx}
+              >
+                ›
+              </button>
+            </div>
+
+            <div className={styles.year_tabs}>
+              {years.map(year => (
+                <button
+                  key={year}
+                  type="button"
+                  className={
+                    year === activeYear
+                      ? `${styles.year_button} ${styles.year_button_active}`
+                      : styles.year_button
+                  }
+                  onClick={() => onYearChange(year)}
+                >
+                  {year}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div
+            className={styles.viewport}
+            ref={viewportRef}
+            onMouseMove={handleMouseMoveCard}
+          >
+            <div
+              className={styles.track}
+              ref={trackRef}
+              style={{ transform: `translateX(-${offset}px)` }}
+            >
+              <div className={styles.month_row}>
+                {monthLabels.map(label => (
+                  <span
+                    key={`${label.index}-${label.month}`}
+                    className={styles.month_label}
+                    style={{ gridColumnStart: label.index + 1 }}
+                  >
+                    {MONTH_NAMES[label.month]}
+                  </span>
+                ))}
+              </div>
+
+              <div className={styles.grid}>
+                {weeks.map((week, weekIndex) => (
+                  <div key={weekIndex} className={styles.week_column}>
+                    {week.map(day => {
+                      const date_obj = new Date(day.date)
+                      const in_year = date_obj.getFullYear() === activeYear
+                      const level = getLevel(day.count)
+
+                      if (!in_year) {
+                        return (
+                          <div
+                            key={day.date}
+                            className={`${styles.cell} ${styles.cell_invisible}`}
+                            aria-hidden="true"
+                          />
+                        )
+                      }
+
+                      return (
+                        <div
+                          key={day.date}
+                          className={`${styles.cell} ${
+                            styles[`level_${level}`]
+                          }`}
+                          aria-label={`${day.date}: ${day.count} activities`}
+                          onMouseEnter={e => handleCellEnter(e, day)}
+                          onMouseLeave={handleCellLeave}
+                        />
+                      )
+                    })}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.footer}>
+            <div className={styles.legend}>
+              <span className={styles.legend_label}>Less</span>
+              <div className={styles.legend_cells}>
+                <span className={`${styles.cell} ${styles.level_0}`} />
+                <span className={`${styles.cell} ${styles.level_1}`} />
+                <span className={`${styles.cell} ${styles.level_2}`} />
+                <span className={`${styles.cell} ${styles.level_3}`} />
+                <span className={`${styles.cell} ${styles.level_4}`} />
+              </div>
+              <span className={styles.legend_label}>More</span>
+            </div>
           </div>
         </div>
       </div>
