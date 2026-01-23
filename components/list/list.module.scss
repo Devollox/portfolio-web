@@ -165,6 +165,7 @@
 .checkbox_btn.checkbox_checked {
   background: var(--glow-color);
   border-color: var(--glow-color);
+  color: var(--bg);
 }
 
 .checkbox_btn:disabled {
