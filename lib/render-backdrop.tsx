@@ -1,7 +1,7 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 type StarOptions = {
   x?: number
@@ -15,13 +15,19 @@ type DrawableEntity = {
 export default function RenderBackdropAnimation() {
   const { theme, systemTheme } = useTheme()
   const resolvedTheme = theme === 'system' ? systemTheme : theme
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted || !resolvedTheme) return
+
     const background = document.getElementById(
       'bgCanvas'
     ) as HTMLCanvasElement | null
-
-    if (!background || !resolvedTheme) return
+    if (!background) return
 
     const backgroundContext = background.getContext('2d')
     if (!backgroundContext) return
@@ -43,12 +49,16 @@ export default function RenderBackdropAnimation() {
       speed: number
       x: number
       y: number
+      life: number
+      fadeInSpeed: number
 
       constructor(options: StarOptions = {}) {
         this.size = 0
         this.speed = 0
         this.x = 0
         this.y = 0
+        this.life = 0
+        this.fadeInSpeed = 0
         this.reset(options)
       }
 
@@ -57,12 +67,25 @@ export default function RenderBackdropAnimation() {
         this.speed = Math.random() * 0.1
         this.x = options.x ?? width
         this.y = options.y ?? Math.random() * height
+        this.life = 0
+        this.fadeInSpeed = 0.01 + Math.random() * 0.02
       }
 
       update() {
         this.x -= this.speed
-        if (this.x < 0) this.reset()
-        else ctx.fillRect(this.x, this.y, this.size, this.size)
+        if (this.x < 0) {
+          this.reset()
+          return
+        }
+
+        if (this.life < 1) {
+          this.life += this.fadeInSpeed
+          if (this.life > 1) this.life = 1
+        }
+
+        ctx.globalAlpha = this.life
+        ctx.fillRect(this.x, this.y, this.size, this.size)
+        ctx.globalAlpha = 1
       }
     }
 
@@ -92,7 +115,7 @@ export default function RenderBackdropAnimation() {
         this.len = Math.random() * 80 + 10
         this.speed = Math.random() * 10 + 6
         this.size = Math.random() * 1 - 0.1
-        this.waitTime = Date.now() * Math.random() * 3000 + 500
+        this.waitTime = Date.now() + Math.random() * 3000 + 500
         this.active = false
       }
 
@@ -137,13 +160,17 @@ export default function RenderBackdropAnimation() {
       animationId = requestAnimationFrame(animate)
     }
 
+    ctx.fillStyle = bgColor
+    ctx.fillRect(0, 0, width, height)
+
     animationId = requestAnimationFrame(animate)
 
     return () => {
       cancelAnimationFrame(animationId)
     }
-  }, [resolvedTheme])
+  }, [mounted, resolvedTheme])
+
+  if (!mounted || !resolvedTheme) return null
 
   return <canvas id="bgCanvas" />
 }
-
