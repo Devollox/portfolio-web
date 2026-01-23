@@ -21,11 +21,82 @@
   padding: 20px 20px 16px;
 }
 
+.sliderHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.sliderControls {
+  display: flex;
+  gap: 6px;
+}
+
+.sliderButton {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid var(--lighter-gray);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition), transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.sliderButton:hover:not(:disabled) {
+  background: rgba(var(--glow-white-rgb), 0.08);
+}
+
+.sliderButton:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.track {
+  display: inline-block;
+  transition: transform 0.25s ease-out;
+}
+
+.monthRow {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 12px;
+  column-gap: 3px;
+  margin-left: 16px;
+  margin-bottom: 6px;
+}
+
+.monthLabel {
+  font-size: 10px;
+  color: rgba(var(--glow-white-rgb), 0.7);
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10px, 1fr));
-  gap: 3px;
-  width: 100%;
+  grid-auto-flow: column;
+  grid-auto-columns: 12px;
+  column-gap: 3px;
+  width: max-content;
+}
+
+.weekColumn {
+  display: grid;
+  grid-auto-rows: 10px;
+  row-gap: 3px;
 }
 
 .card::after {
