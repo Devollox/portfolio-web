@@ -5,25 +5,25 @@ import ActivityGrid from './index'
 
 const GithubActivity = () => {
   const { loading, years, daysByYear } = useGithubActivity('Devollox')
-  const [activeYear, setActiveYear] = useState<number | null>(null)
+  const [active_year, set_active_year] = useState<number | null>(null)
 
   if (loading) {
     return (
       <section className={styles.wrapper}>
         <h2 className={styles.title}>Activity</h2>
-        <div className={styles.skeletonCard}>
-          <div className={styles.skeletonGrid} />
-          <div className={styles.skeletonFooter}>
-            <div className={styles.skeletonDotRow}>
-              <span className={styles.skeletonDot} />
-              <span className={styles.skeletonDot} />
-              <span className={styles.skeletonDot} />
-              <span className={styles.skeletonDot} />
+        <div className={styles.skeleton_card}>
+          <div className={styles.skeleton_grid} />
+          <div className={styles.skeleton_footer}>
+            <div className={styles.skeleton_dot_row}>
+              <span className={styles.skeleton_dot} />
+              <span className={styles.skeleton_dot} />
+              <span className={styles.skeleton_dot} />
+              <span className={styles.skeleton_dot} />
             </div>
-            <div className={styles.skeletonYearTabs}>
-              <span className={styles.skeletonTab} />
-              <span className={styles.skeletonTab} />
-              <span className={styles.skeletonTab} />
+            <div className={styles.skeleton_year_tabs}>
+              <span className={styles.skeleton_tab} />
+              <span className={styles.skeleton_tab} />
+              <span className={styles.skeleton_tab} />
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@ const GithubActivity = () => {
     return null
   }
 
-  const year = activeYear ?? years[0]
+  const year = active_year ?? years[0]
   const days = daysByYear.get(year) ?? []
 
   return (
@@ -48,7 +48,7 @@ const GithubActivity = () => {
         }))}
         years={years}
         activeYear={year}
-        onYearChange={setActiveYear}
+        onYearChange={set_active_year}
       />
     </section>
   )
