@@ -104,6 +104,13 @@ const buildWeeks = (days: ActivityDay[]) => {
     }
   }
 
+  if (
+    monthLabels.length > 1 &&
+    monthLabels[monthLabels.length - 1].month === monthLabels[0].month
+  ) {
+    monthLabels.pop()
+  }
+
   return { weeks, monthLabels }
 }
 
