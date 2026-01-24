@@ -47,25 +47,35 @@ const Highlights = ({ initialTotalVisitors = 0 }: HighlightsProps) => {
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Highlights</h2>
       <div className={styles.grid}>
-        {stats.map((stat, idx) => (
-          <div key={idx} className={styles.card} onMouseMove={handleMouseMove}>
-            <div className={styles.icon}>{stat.icon}</div>
-            <div className={styles.value}>
-              {stat.isCountUp ? (
-                <CountUp to={totalVisitors} duration={2.5} />
-              ) : (
-                stat.num
-              )}
+        {stats.map((stat, idx) => {
+          const isVisitors =
+            stat.label === 'Visitors' && stat.isCountUp === true
+
+          return (
+            <div
+              key={idx}
+              className={styles.card}
+              onMouseMove={handleMouseMove}
+            >
+              <div className={styles.icon}>{stat.icon}</div>
+              <div className={styles.value}>
+                {isVisitors && totalVisitors === 0 ? (
+                  <div
+                    className={`${styles.visitors_skeleton} ${styles.shimmer}`}
+                  />
+                ) : stat.isCountUp ? (
+                  <CountUp to={totalVisitors} duration={2.5} />
+                ) : (
+                  stat.num
+                )}
+              </div>
+              <div className={styles.label}>{stat.label}</div>
             </div>
-            <div className={styles.label}>{stat.label}</div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
 }
 
 export default Highlights
-
-
-

@@ -46,7 +46,7 @@
   left: var(--mouse-x);
   top: var(--mouse-y);
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, var(--colors-purple) 0%, transparent 60%);
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 60%);
   filter: blur(22px);
   opacity: 0;
   transition: opacity 0.25s ease;
@@ -54,10 +54,6 @@
 
 .card:hover::after {
   opacity: 0.5;
-}
-
-.card::after {
-  background: radial-gradient(circle, var(--glow-color) 0%, transparent 60%);
 }
 
 .icon {
@@ -68,6 +64,9 @@
 .value {
   font-size: 28px;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .label {
@@ -75,4 +74,50 @@
   opacity: 0.65;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+.visitors_skeleton {
+  width: 64.78px;
+  height: 42px;
+  border-radius: var(--radius);
+  background-color: var(--article-colorbtn);
+}
+
+.shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 2.5s infinite ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position-x: -200%;
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    background-position-x: 200%;
+    opacity: 0.7;
+  }
+}
+
+[data-theme='light'] .shimmer {
+  background-image: linear-gradient(
+    90deg,
+    #ededed 30%,
+    #dcdcdc 50%,
+    #ededed 70%
+  );
+  background-color: #f3f3f3;
+}
+
+[data-theme='dark'] .shimmer {
+  background-image: linear-gradient(
+    90deg,
+    #1b1b1b 30%,
+    #2a2a2a 50%,
+    #1b1b1b 70%
+  );
+  background-color: #111111;
 }
