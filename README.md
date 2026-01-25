@@ -5,7 +5,7 @@
 ## About the Project
 
 This is my personal portfolio website built with [Next.js](https://nextjs.org/).
-It includes a real-time Signature guestbook, a detailed Uses page with tools and setup, a small blog, OAuth login (Google/GitHub) and light/dark themes. 
+It includes a real-time Signature guestbook, a detailed Uses page with tools and setup, a small blog, OAuth login (Google/GitHub) and light/dark themes.
 
 The project is still evolving, so if you spot any bugs, typos or have ideas for improvements, feel free to open an issue or pull request.
 
@@ -40,7 +40,7 @@ The project is still evolving, so if you spot any bugs, typos or have ideas for 
     Fork or clone this project from Github to get your own copy of it.
 
 1.  **Installation**
-     
+
     Once this is installed you can run `npm install` in your project directory to install dependencies.
 
     ```sh
@@ -54,15 +54,14 @@ The project is still evolving, so if you spot any bugs, typos or have ideas for 
     ```sh
     npm run dev
     ```
-    
+
 ---
 
 ## Setup Instructions
 
 To run the project locally, you need to configure environment variables and Firebase.
 
-
-### Create a Firebase project in [Firebase Console]([https://console.cloud.google.com/](https://console.firebase.google.com/)):
+### Create a Firebase project in [Firebase Console](<[https://console.cloud.google.com/](https://console.firebase.google.com/)>):
 
 Obtain your API keys and configuration values:
 
@@ -76,10 +75,12 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
 NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your-measurement-id
 
+Profile → Settings → Developer settings → Personal access tokens
+GITHUB_TOKEN
 
 Firebase Console → Project Settings → Service accounts → Firebase Admin SDK → Generate new private key
-FIREBASE_PROJECT_ID=your-project-id           
-FIREBASE_CLIENT_EMAIL=your-service-account-email  
+FIREBASE_PROJECT_ID=your-project-id
+FIREBASE_CLIENT_EMAIL=your-service-account-email
 FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
 ```
 
@@ -90,7 +91,7 @@ FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY----
 <details>
   <summary>Show Firebase rules</summary>
 
-  See full Firebase Realtime Database rules in  
+See full Firebase Realtime Database rules in  
  [FIREBASE-RULES.md](https://github.com/Devollox/Personal-WebSite/blob/main/FIREBASE-RULES.md)
 
 </details>
@@ -100,6 +101,7 @@ FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY----
 Create OAuth applications in Google and GitHub:
 
 - **Google OAuth:**
+
   - `GOOGLE_SECRET`
   - `GOOGLE_ID`
 
@@ -134,6 +136,7 @@ Production:
 ```
 
 ---
+
 ## Contributing
 
 Contributions are welcome!  
