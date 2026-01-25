@@ -76,12 +76,17 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your-measurement-id
 
 Profile → Settings → Developer settings → Personal access tokens
-GITHUB_TOKEN
+GITHUB_TOKEN=your-github-token
 
 Firebase Console → Project Settings → Service accounts → Firebase Admin SDK → Generate new private key
 FIREBASE_PROJECT_ID=your-project-id
 FIREBASE_CLIENT_EMAIL=your-service-account-email
 FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+
+GOOGLE_SECRET=your-google-secret
+GOOGLE_ID=your-google-client-id
+GITHUB_SECRET=your-github-secret
+GITHUB_ID=your-github-client-id
 ```
 
 > Important: `FIREBASE_PRIVATE_KEY` must be a single line with `\n` instead of actual line breaks, otherwise Firebase Admin will not initialize.
