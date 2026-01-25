@@ -35,7 +35,9 @@ if (loading) {
   return (
     <Page title={`Activity ${date}`} description={`All activities on ${date}.`}>
       <div className={styles.wrapper}>
-        <h1 className={styles.title}>Activity</h1>
+        <Information title="Activity">   
+          Loading activity.
+        </Information>
         <div className={styles.list_card} >
           <ul className={styles.list}>
             {Array.from({ length: 3 }).map((_, i) => (
@@ -95,14 +97,11 @@ if (loading) {
   return (
     <Page title={`Activity ${date}`} description={`All activities on ${date}.`}>
       <div className={styles.wrapper}>
-
         <Information title="Activity">
           All GitHub activity for {date}.
         </Information>
-
         <div
           className={styles.list_card}
-
         >
           <ul className={styles.list}
 					>
