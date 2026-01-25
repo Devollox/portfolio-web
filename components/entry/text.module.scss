@@ -13,8 +13,8 @@
 .item::after {
   content: '';
   position: absolute;
-  width: 260px;
-  height: 260px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   pointer-events: none;
   left: var(--mouse-x);
