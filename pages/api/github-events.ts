@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { getCachedEvents, setCachedEvents } from '../../lib/github-events-cache'
 
-type GithubEvent = {
+export type GithubEvent = {
   id: string
   type: string
   repo: string
@@ -181,6 +182,11 @@ export default async function handler(
     return res.status(400).json({ events: [], error: 'Missing user param' })
   }
 
+  const cached = getCachedEvents(user)
+  if (cached) {
+    return res.status(200).json({ events: cached })
+  }
+
   try {
     const ghRes = await ghFetch(
       `https://api.github.com/users/${encodeURIComponent(
@@ -210,8 +216,11 @@ export default async function handler(
       })
     )
 
+    setCachedEvents(user, events)
+
     return res.status(200).json({ events })
-  } catch {
-    return res.status(200).json({ events: [] })
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ events: [], error: 'GitHub events fetch failed' })
   }
 }
