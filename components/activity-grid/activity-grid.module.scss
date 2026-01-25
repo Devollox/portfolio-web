@@ -66,9 +66,6 @@
   justify-content: center;
   cursor: pointer;
   padding: 0;
-  transition: background var(--transition), color var(--transition),
-    border-color var(--transition), transform var(--transition),
-    box-shadow var(--transition);
 }
 
 .slider_button:hover:not(:disabled) {
@@ -225,9 +222,6 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   cursor: pointer;
-  transition: background var(--transition), color var(--transition),
-    border-color var(--transition), transform var(--transition),
-    box-shadow var(--transition);
 }
 
 .year_button_active {
