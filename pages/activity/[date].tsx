@@ -3,7 +3,7 @@ import Page from '@components/page'
 import { useGithubActivity } from 'hook/useGithubActivity'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
-import { MouseEvent, useMemo } from 'react'
+import { useMemo } from 'react'
 import styles from './activity-day.module.scss'
 
 type PageProps = {
@@ -23,23 +23,24 @@ const ActivityDayPage = ({
     eventsByDate
   } = useGithubActivity('Devollox')
 
-  const handleMouseMoveList = (e: MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
-    e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
-  }
+const handleMouseMoveItem = (e: React.MouseEvent<HTMLLIElement>) => {
+  const rect = e.currentTarget.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+  e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
+  e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
+}
 
 if (loading) {
   return (
     <Page title={`Activity ${date}`} description={`All activities on ${date}.`}>
       <div className={styles.wrapper}>
         <h1 className={styles.title}>Activity</h1>
-        <div className={styles.list_card} onMouseMove={handleMouseMoveList}>
+        <div className={styles.list_card} >
           <ul className={styles.list}>
             {Array.from({ length: 3 }).map((_, i) => (
               <li
+							onMouseMove={handleMouseMoveItem}
                 key={i}
                 className={`${styles.item} ${styles.item_skeleton}`}
               >
@@ -101,11 +102,13 @@ if (loading) {
 
         <div
           className={styles.list_card}
-          onMouseMove={handleMouseMoveList}
+
         >
-          <ul className={styles.list}>
+          <ul className={styles.list}
+					>
             {events.map(event => (
-              <li key={event.id} className={styles.item}>
+              <li key={event.id} className={styles.item}
+							onMouseMove={handleMouseMoveItem}>
                 <div className={styles.item_header}>
                   <span className={styles.badge_type}>{event.type}</span>
                   <span className={styles.repo}>{event.repo}</span>
