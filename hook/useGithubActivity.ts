@@ -10,24 +10,69 @@ type GithubResponse = {
   contributions: GithubDay[]
 }
 
+export type GithubEvent = {
+  id: string
+  type: string
+  repo: string
+  title?: string
+  url?: string
+  date: string
+}
+
+type EventsResponse = {
+  events: GithubEvent[]
+}
+
 export const useGithubActivity = (username: string) => {
   const [days, setDays] = useState<GithubDay[]>([])
+  const [eventsByDate, setEventsByDate] = useState<Map<string, GithubEvent[]>>(
+    new Map()
+  )
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    let cancelled = false
+
     const load = async () => {
+      setLoading(true)
+
       try {
-        const res = await fetch(
-          `https://github-contributions-api.jogruber.de/v4/${username}`
-        )
-        if (!res.ok) return
-        const data: GithubResponse = await res.json()
-        setDays(data.contributions || [])
+        const [contribRes, eventsRes] = await Promise.all([
+          fetch(`https://github-contributions-api.jogruber.de/v4/${username}`),
+          fetch(`/api/github-events?user=${username}`)
+        ])
+
+        if (contribRes.ok) {
+          const contribData: GithubResponse = await contribRes.json()
+          if (!cancelled) {
+            setDays(contribData.contributions || [])
+          }
+        }
+
+        if (eventsRes.ok) {
+          const eventsData: EventsResponse = await eventsRes.json()
+          if (!cancelled) {
+            const map = new Map<string, GithubEvent[]>()
+            eventsData.events.forEach(ev => {
+              const list = map.get(ev.date) ?? []
+              list.push(ev)
+              map.set(ev.date, list)
+            })
+            setEventsByDate(map)
+          }
+        }
       } finally {
-        setLoading(false)
+        if (!cancelled) {
+          setLoading(false)
+        }
       }
     }
+
     load()
+
+    return () => {
+      cancelled = true
+    }
   }, [username])
 
   const byYear = useMemo(() => {
@@ -47,5 +92,5 @@ export const useGithubActivity = (username: string) => {
     }
   }, [days])
 
-  return { loading, ...byYear }
+  return { loading, ...byYear, eventsByDate }
 }
