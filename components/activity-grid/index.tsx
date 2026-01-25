@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { MouseEvent, useEffect, useMemo, useRef, useState } from 'react'
 import styles from './activity-grid.module.scss'
 
@@ -132,6 +133,8 @@ const ActivityGrid = ({
   activeYear,
   onYearChange
 }: ActivityGridProps) => {
+  const router = useRouter()
+
   const { weeks, monthLabels } = useMemo(() => buildWeeks(days), [days])
   const [offset, setOffset] = useState(0)
   const [maxOffsetPx, setMaxOffsetPx] = useState(0)
@@ -193,6 +196,10 @@ const ActivityGrid = ({
 
   const handleCellLeave = () => {
     setHoveredDay(null)
+  }
+
+  const handleCellClick = (day: ActivityDay) => {
+    router.push(`/activity/${day.date}`)
   }
 
   return (
@@ -300,6 +307,7 @@ const ActivityGrid = ({
                           aria-label={`${day.date}: ${day.count} activities`}
                           onMouseEnter={e => handleCellEnter(e, day)}
                           onMouseLeave={handleCellLeave}
+                          onClick={() => handleCellClick(day)}
                         />
                       )
                     })}
