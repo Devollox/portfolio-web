@@ -38,15 +38,18 @@
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  pointer-events: none;
-  z-index: -1;
   left: var(--mouse-x);
   top: var(--mouse-y);
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, var(--glow-color) 0%, transparent 60%);
+  background: radial-gradient(
+    circle,
+    var(--glow-color, #6b4bff) 0%,
+    transparent 60%
+  );
   filter: blur(22px);
   opacity: 0;
   transition: opacity 0.25s ease;
+  pointer-events: none;
 }
 
 .card:hover::after {
@@ -70,4 +73,15 @@
 .stack {
   font-size: 12px;
   opacity: 0.7;
+}
+
+.role {
+  pointer-events: none;
+  padding: 2px 6px;
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--radius);
+  font-size: 10px;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
