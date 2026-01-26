@@ -32,7 +32,7 @@ const StackCard = ({ title, badge, sections }: StackCardProps) => {
       <div className={styles.grid}>
         {sections.map(section => (
           <div key={section.title}>
-            <div className={styles.sectionTitle}>{section.title}</div>
+            <div className={styles.section_title}>{section.title}</div>
             {section.lines.map(line => (
               <div key={line}>{line}</div>
             ))}

@@ -54,13 +54,15 @@
 }
 
 .badge {
-  padding: 2px 6px;
+  pointer-events: none;
   border: 1px solid var(--lighter-gray);
   border-radius: var(--radius);
-  font-size: 10px;
   opacity: 0.6;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  padding: 2px 6px;
+  font-size: 10px;
+  z-index: -1;
 }
 
 .grid {
@@ -71,7 +73,7 @@
   opacity: 0.9;
 }
 
-.sectionTitle {
+.section_title {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;

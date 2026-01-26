@@ -16,14 +16,18 @@
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  pointer-events: none;
   left: var(--mouse-x);
   top: var(--mouse-y);
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, var(--glow-color) 0%, transparent 60%);
-  filter: blur(26px);
+  background: radial-gradient(
+    circle,
+    var(--glow-color, #6b4bff) 0%,
+    transparent 60%
+  );
+  filter: blur(22px);
   opacity: 0;
   transition: opacity 0.25s ease;
+  pointer-events: none;
 }
 
 .item:hover::after {
