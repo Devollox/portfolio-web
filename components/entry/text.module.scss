@@ -100,8 +100,14 @@
   color: var(--fg);
 }
 
+.wrapper_date {
+  color: var(--fg) !important;
+  opacity: 0.7 !important;
+}
+
 .description {
-  color: var(--colors-secondary);
+  color: var(--fg) !important;
+  opacity: 0.7 !important;
   margin-top: 3px;
   font-size: 0.95rem;
   display: -webkit-box;
