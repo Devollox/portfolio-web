@@ -23,45 +23,44 @@ const ActivityDayPage = ({
     eventsByDate
   } = useGithubActivity('Devollox')
 
-const handleMouseMoveItem = (e: React.MouseEvent<HTMLLIElement>) => {
-  const rect = e.currentTarget.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-  e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
-  e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
-}
+  const handleMouseMoveItem = (e: React.MouseEvent<HTMLLIElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`)
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`)
+  }
 
-if (loading) {
-  return (
-    <Page title={`Activity ${date}`} description={`All activities on ${date}.`}>
-      <div className={styles.wrapper}>
-        <Information title="Activity">   
-          Loading activity.
-        </Information>
-        <div className={styles.list_card} >
-          <ul className={styles.list}>
-            {Array.from({ length: 3 }).map((_, i) => (
-              <li
-							onMouseMove={handleMouseMoveItem}
-                key={i}
-                className={`${styles.item} ${styles.item_skeleton}`}
-              >
-                <div
-                  className={`${styles.skeleton_bar} ${styles.shimmer}`}
-                />
-                <div
-                  className={`${styles.skeleton_bar_short} ${styles.shimmer}`}
-                />
-              </li>
-            ))}
-          </ul>
+  const handleItemClick = (url?: string) => {
+    if (!url) return
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
+
+  if (loading) {
+    return (
+      <Page title={`Activity ${date}`} description={`All activities on ${date}.`}>
+        <div className={styles.wrapper}>
+          <Information title="Activity">
+            Loading activity.
+          </Information>
+          <div className={styles.list_card}>
+            <ul className={styles.list}>
+              {Array.from({ length: 3 }).map((_, i) => (
+                <li
+                  key={i}
+                  onMouseMove={handleMouseMoveItem}
+                  className={`${styles.item} ${styles.item_skeleton}`}
+                >
+                  <div className={`${styles.skeleton_bar} ${styles.shimmer}`} />
+                  <div className={`${styles.skeleton_bar_short} ${styles.shimmer}`} />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
-    </Page>
-  )
-}
-
-
+      </Page>
+    )
+  }
 
   const year = parsed.getFullYear()
 
@@ -100,27 +99,31 @@ if (loading) {
         <Information title="Activity">
           All GitHub activity for {date}.
         </Information>
-        <div
-          className={styles.list_card}
-        >
-          <ul className={styles.list}
-					>
+        <div className={styles.list_card}>
+          <ul className={styles.list}>
             {events.map(event => (
-              <li key={event.id} className={styles.item}
-							onMouseMove={handleMouseMoveItem}>
+              <li
+                key={event.id}
+                className={styles.item}
+                onMouseMove={handleMouseMoveItem}
+                onClick={() => handleItemClick(event.url)}
+              >
                 <div className={styles.item_header}>
-                  <span className={styles.badge_type}>{event.type}</span>
                   <span className={styles.repo}>{event.repo}</span>
+                  <span className={styles.badge_type}>{event.type}</span>
                 </div>
+
                 {event.title && (
                   <div className={styles.item_title}>{event.title}</div>
                 )}
+
                 {event.url && (
                   <a
                     href={event.url}
                     target="_blank"
                     rel="noreferrer"
                     className={styles.item_link}
+                    onClick={e => e.stopPropagation()}
                   >
                     Open on GitHub
                   </a>
