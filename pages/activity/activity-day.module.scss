@@ -33,7 +33,6 @@
   height: 220px;
   border-radius: 50%;
   pointer-events: none;
-  z-index: -1;
   left: var(--mouse-x);
   top: var(--mouse-y);
   transform: translate(-50%, -50%);
@@ -63,11 +62,13 @@
 
 .badge_type {
   pointer-events: none;
-  padding: 2px 8px;
-  border-radius: var(--inline-radius);
-  border: 1px solid rgba(var(--glow-white-rgb), 0.3);
-  background-color: rgba(var(--glow-white-rgb), 0.08);
-  font-size: 11px;
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--radius);
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  font-size: 10px;
 }
 
 .repo {
