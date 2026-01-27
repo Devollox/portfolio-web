@@ -1,41 +1,49 @@
 {
   "computer": [
     {
+      "id": "intel-xeon-e5-2678-v3",
       "title": "Intel Xeon E5 2678 V3",
       "description": "Oh this processor is Chinese.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Intel+Xeon+E5+2678+V3"
     },
     {
+      "id": "intel-x99h",
       "title": "Intel X99H",
       "description": "Half of the RAM refuses to work.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Intel+X99H"
     },
     {
+      "id": "xpg-32gb",
       "title": "XPG 32GB",
       "description": "Is it possible to have 64GB - no, you can't!.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=XPG+32GB+RAM"
     },
     {
+      "id": "coolers-snowman",
       "title": "Coolers Snowman",
       "description": "Is there anything louder than this cooler?",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Coolers+Snowman"
     },
     {
+      "id": "aerocool-eco-550w",
       "title": "AeroCool ECO 550W",
       "description": "Works almost like a transformer.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=AeroCool+ECO+550W"
     },
     {
+      "id": "gigabyte-gtx-1060-6gb",
       "title": "GIGABYTE GTX 1060 6GB",
       "description": "People's video card.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=GIGABYTE+GTX+1060+6GB"
     },
     {
+      "id": "patriot-p300-512gb",
       "title": "512GB SSDM.2 Patriot P300",
       "description": "I need more memory!",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Patriot+P300+512GB"
     },
     {
+      "id": "1stplayer-megaview",
       "title": "1STPLAYER Megaview",
       "description": "Took it from a homeless person.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=1STPLAYER+Megaview"
@@ -43,6 +51,7 @@
   ],
   "desk": [
     {
+      "id": "gigabyte-g24f2-monitor",
       "title": "GIGABYTE G24F2 23.8\" FullHD Monitor",
       "description": "I love the smoothness and black theme.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=GIGABYTE+G24F2+Monitor"
@@ -50,21 +59,25 @@
   ],
   "mouse": [
     {
+      "id": "delux-m800pro",
       "title": "Delux M800PRO",
       "description": "The mouse breaks more than this site.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Delux+M800PRO"
     },
     {
+      "id": "aj390",
       "title": "AJ390",
       "description": "We are very good.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=AJ390+mouse"
     },
     {
+      "id": "razer-viper-mini",
       "title": "Razer Viper MINI",
       "description": "Broke after a month :(",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Razer+Viper+MINI"
     },
     {
+      "id": "attack-shark-r5-ultra",
       "title": "ATTACK SHARK R5 ultra",
       "description": "My dream!",
       "link": "https://www.aliexpress.com/wholesale?SearchText=ATTACK+SHARK+R5+ultra"
@@ -72,11 +85,13 @@
   ],
   "keyboard": [
     {
+      "id": "fizz-k617",
       "title": "Fizz K617",
       "description": "My preferred wireless keyboard with a 65% compact layout.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Fizz+K617"
     },
     {
+      "id": "ajazz-ak680max",
       "title": "AJAZZ AK680MAX",
       "description": "If anything I love astronomy.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=AJAZZ+AK680MAX"
@@ -84,21 +99,25 @@
   ],
   "microphone": [
     {
+      "id": "fifine-k688",
       "title": "Fifine K688",
       "description": "Chinese copy - Shure SM7B.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Fifine+K688"
     },
     {
+      "id": "fifine-a8",
       "title": "Fifine A8",
       "description": "Well, this is top bang for your buck!",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Fifine+A8"
     },
     {
+      "id": "fifine-am8",
       "title": "Fifine AM8",
       "description": "It really does look like a brick.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Fifine+AM8"
     },
     {
+      "id": "fifine-k669",
       "title": "Fifine K669",
       "description": "Scary sound.",
       "link": "https://www.aliexpress.com/wholesale?SearchText=Fifine+K669"
@@ -106,11 +125,13 @@
   ],
   "coding": [
     {
+      "id": "vscode",
       "title": "VSCode",
       "description": "I moved to VSCode like everybody else.",
       "link": "https://code.visualstudio.com/"
     },
     {
+      "id": "webstorm",
       "title": "WebStorm",
       "description": "I end up sitting here :P.",
       "link": "https://www.jetbrains.com/webstorm/"
@@ -118,26 +139,31 @@
   ],
   "apps": [
     {
+      "id": "adobe-photoshop",
       "title": "Adobe Photoshop",
       "description": "I usually use it rarely, for creating illustrations.",
       "link": "https://www.adobe.com/products/photoshop.html"
     },
     {
+      "id": "vegas-pro",
       "title": "VEGAS Pro",
       "description": "Best editing apps.",
       "link": "https://www.vegascreativesoftware.com/"
     },
     {
+      "id": "steam",
       "title": "Steam",
       "description": "What else is needed for happiness?",
       "link": "https://steampowered.com/"
     },
     {
+      "id": "discord",
       "title": "Discord",
       "description": "Better than Skype.",
       "link": "https://discord.com/"
     },
     {
+      "id": "wallpaper-engine",
       "title": "Wallpaper Engine",
       "description": "Always black wallpaper.",
       "link": "https://www.wallpaperengine.io/"
@@ -145,31 +171,31 @@
   ],
   "services": [
     {
+      "id": "vercel",
       "title": "Vercel",
       "description": "Here is where I host all my websites. By far the best developer experience.",
       "link": "https://vercel.com/"
     },
     {
+      "id": "firebase",
       "title": "Firebase",
       "description": "A no-brainer database and auth solution for side projects.",
       "link": "https://firebase.google.com/"
     },
     {
+      "id": "figma",
       "title": "Figma",
       "description": "I never thought something would replace the Adobe suite for me. Figma did.",
       "link": "https://www.figma.com/"
     },
     {
+      "id": "regru",
       "title": "RegRU",
       "description": "I buy and renew all my domains here.",
       "link": "https://www.reg.ru/"
     },
     {
-      "title": "Cloudflare",
-      "description": "The DNS service I use with all my domains. Amazing product.",
-      "link": "https://www.cloudflare.com/"
-    },
-    {
+      "id": "spotify",
       "title": "Spotify",
       "description": "I love listening to phonk while I'm writing code..",
       "link": "https://www.spotify.com/"
