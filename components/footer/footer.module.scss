@@ -214,6 +214,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  opacity: 0.75;
 }
 
 .footer_glow_title {
@@ -224,13 +225,14 @@
 }
 
 .footer_glow_badge {
-  font-size: 10px;
+  pointer-events: none;
+  border: 1px solid var(--lighter-gray);
+  border-radius: var(--radius);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 2px 6px;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--colors-secondary);
+  font-size: 10px;
+  color: var(--fg);
 }
 
 .footer_glow_desc {
