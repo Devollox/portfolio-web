@@ -30,7 +30,7 @@ const SignInPage = () => {
         <p
           style={{
             fontSize: '0.9rem',
-            opacity: 0.7,
+            opacity: 0.8,
             marginBottom: '0.5rem'
           }}
         >

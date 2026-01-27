@@ -41,7 +41,7 @@ const CreateForm = ({ onSaveSignature }: CreateFormProps) => {
           justifyContent: 'center',
           alignItems: 'center',
           fontSize: '0.85rem',
-          opacity: 0.65,
+          opacity: 0.8,
           height: '19px',
           marginBottom: '0.5rem',
           gap: '4px'
