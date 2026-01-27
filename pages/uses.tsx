@@ -6,6 +6,13 @@ import data from '@data/uses.json'
 import getPosts from '@lib/get-posts'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 
+type UseItem = {
+  id: string
+  title: string
+  description: string
+  link?: string
+}
+
 const {
   apps,
   coding,
@@ -16,16 +23,15 @@ const {
   mouse,
   services
 } = data as {
-  apps: { title: string; description: string; link?: string }[]
-  coding: { title: string; description: string; link?: string }[]
-  computer: { title: string; description: string; link?: string }[]
-  desk: { title: string; description: string; link?: string }[]
-  keyboard: { title: string; description: string; link?: string }[]
-  microphone: { title: string; description: string; link?: string }[]
-  mouse: { title: string; description: string; link?: string }[]
-  services: { title: string; description: string; link?: string }[]
+  apps: UseItem[]
+  coding: UseItem[]
+  computer: UseItem[]
+  desk: UseItem[]
+  keyboard: UseItem[]
+  microphone: UseItem[]
+  mouse: UseItem[]
+  services: UseItem[]
 }
-
 
 export const getStaticProps: GetStaticProps<{
   posts: ReturnType<typeof getPosts>
@@ -34,44 +40,39 @@ export const getStaticProps: GetStaticProps<{
   return { props: { posts } }
 }
 
-
 type Props = InferGetStaticPropsType<typeof getStaticProps>
-
 
 const UsesPage = ({}: Props) => {
   const renderList = (
     sectionName: string,
     title: string,
-    items: { title: string; description: string; link?: string }[],
+    items: UseItem[],
     badge: string
   ) => {
     if (!items || !Array.isArray(items) || items.length === 0) return null
 
-
-    const toolsWithIndex = items.map((item, i) => ({
-      index: i,
+    const toolsWithIndex = items.map(item => ({
+      id: item.id,
       title: item.title
     }))
 
-
     return (
-        <List listTitle={title} badge={badge}>
-          {items.map((entry, index) => (
-            <ListIndex
-              key={`${sectionName}-${index}`}
-              section={sectionName}
-              index={index}
-              selection="-"
-              title={entry.title}
-              description={entry.description}
-              allTools={toolsWithIndex}
-              link={entry.link}
-            />
-          ))}
-        </List>
+      <List listTitle={title} badge={badge}>
+        {items.map(entry => (
+          <ListIndex
+            key={`${sectionName}-${entry.id}`}
+            section={sectionName}
+            index={entry.id}
+            selection="-"
+            title={entry.title}
+            description={entry.description}
+            allTools={toolsWithIndex}
+            link={entry.link}
+          />
+        ))}
+      </List>
     )
   }
-
 
   return (
     <Page description="My config uses." title="Uses">
@@ -89,7 +90,6 @@ const UsesPage = ({}: Props) => {
         </Information>
       </div>
 
-
       {renderList('computer', 'Computer', computer, 'Core')}
       {renderList('desk', 'Desk', desk, 'Desk setup')}
       {renderList('mouse', 'Mouse', mouse, 'Pointer')}
@@ -101,6 +101,5 @@ const UsesPage = ({}: Props) => {
     </Page>
   )
 }
-
 
 export default UsesPage

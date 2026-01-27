@@ -7,12 +7,12 @@ import {
 import styles from './list.module.scss'
 
 type Tool = {
-  index: number
+  id: string
   title: string
 }
 
 type PopularTool = {
-  index: number
+  id: string
   count: number
   title: string
 }
@@ -21,7 +21,7 @@ type ListIndexProps = {
   title: string
   description?: string
   selection?: string
-  index: number
+  index: string
   section: string
   allTools: Tool[]
   link?: string
@@ -62,9 +62,10 @@ const ListIndex = ({
 
   useEffect(() => {
     const unsubscribe = subscribePopularUseTools(section, tools => {
-      const toolsWithTitles: PopularTool[] = tools.map((tool: any) => ({
-        ...tool,
-        title: allTools[tool.index]?.title || `Tool ${tool.index}`
+      const toolsWithTitles: PopularTool[] = tools.map(tool => ({
+        id: tool.id,
+        count: tool.count,
+        title: allTools.find(t => t.id === tool.id)?.title || `Tool ${tool.id}`
       }))
       setPopularToolsData(toolsWithTitles)
     })
