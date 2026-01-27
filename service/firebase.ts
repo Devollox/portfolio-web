@@ -54,7 +54,7 @@ export type CursorData = {
 type UseReactionCount = number
 
 type PopularTool = {
-  index: number
+  id: string
   count: number
 }
 
@@ -285,10 +285,10 @@ export const removeCursor = (room: string, userId: string): Promise<void> => {
 
 export const subscribeUseReaction = (
   section: string,
-  index: number,
+  id: string,
   callback: (count: UseReactionCount) => void
 ): Unsubscribe => {
-  const refPath = ref(database, `uses_reactions/${section}/${index}`)
+  const refPath = ref(database, `uses_reactions/${section}/${id}`)
   const unsubscribe = onValue(refPath, snapshot => {
     if (!snapshot.exists()) {
       callback(0)
@@ -301,9 +301,9 @@ export const subscribeUseReaction = (
 
 export const incrementUseReaction = async (
   section: string,
-  index: number
+  id: string
 ): Promise<void> => {
-  const reactionRef = ref(database, `uses_reactions/${section}/${index}`)
+  const reactionRef = ref(database, `uses_reactions/${section}/${id}`)
   await runTransaction(reactionRef, current => {
     if (current === null) return 1
     return (current as number) + 1
@@ -322,8 +322,8 @@ export const subscribePopularUseTools = (
     }
     const val = snapshot.val() as Record<string, UseReactionCount>
     const tools: PopularTool[] = Object.entries(val)
-      .map(([index, count]) => ({
-        index: parseInt(index, 10),
+      .map(([id, count]) => ({
+        id,
         count: count as UseReactionCount
       }))
       .sort((a, b) => b.count - a.count)
