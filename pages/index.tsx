@@ -4,6 +4,7 @@ import styles from '@components/page/home-page.module.scss'
 import getPosts from '@lib/get-posts'
 import RenderBackdropAnimation from '@lib/render-backdrop'
 import generateRssFeed from '@lib/rss'
+import useEncoding from 'hook/useEncoding'
 import { ArrowRight } from 'lucide-react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 
@@ -16,6 +17,8 @@ export const getStaticProps: GetStaticProps<{ data: {} }> = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
 const HomePage = ({}: Props) => {
+  useEncoding('effectAbbr', 25)
+
   return (
     <span className={styles.wrapper_home}>
       <RenderBackdropAnimation />
@@ -31,7 +34,7 @@ const HomePage = ({}: Props) => {
                 Programmer &amp; Technical <a href="/about">semi-engineer</a>
               </strong>
               <br />
-              <abbr id="effect">Obsessed with the Internet</abbr>
+              <abbr id="effectAbbr">Obsessed with the Internet</abbr>
             </p>
             <Command
               variantKey="false"
