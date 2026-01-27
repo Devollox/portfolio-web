@@ -172,6 +172,8 @@ const buildUrl = (ev: any): string | undefined => {
   return baseRepoHtml
 }
 
+const MAX_PAGES = 3
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ApiResponse>
@@ -188,20 +190,32 @@ export default async function handler(
   }
 
   try {
-    const ghRes = await ghFetch(
-      `https://api.github.com/users/${encodeURIComponent(
-        user
-      )}/events/public?per_page=100`
-    )
+    const allRaw: any[] = []
 
-    if (!ghRes || !Array.isArray(ghRes)) {
+    for (let page = 1; page <= MAX_PAGES; page++) {
+      const ghRes = await ghFetch(
+        `https://api.github.com/users/${encodeURIComponent(
+          user
+        )}/events/public?per_page=100&page=${page}`
+      )
+
+      if (!ghRes || !Array.isArray(ghRes) || ghRes.length === 0) {
+        break
+      }
+
+      allRaw.push(...ghRes)
+
+      if (ghRes.length < 100) {
+        break
+      }
+    }
+
+    if (!allRaw.length) {
       return res.status(200).json({ events: [] })
     }
 
-    const raw = ghRes as any[]
-
     const events: GithubEvent[] = await Promise.all(
-      raw.map(async ev => {
+      allRaw.map(async ev => {
         const created = String(ev.created_at ?? '')
         const isoDate = created.slice(0, 10)
 
@@ -221,6 +235,8 @@ export default async function handler(
     return res.status(200).json({ events })
   } catch (err) {
     console.error(err)
-    return res.status(500).json({ events: [], error: 'GitHub events fetch failed' })
+    return res
+      .status(500)
+      .json({ events: [], error: 'GitHub events fetch failed' })
   }
 }

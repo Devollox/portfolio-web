@@ -10,6 +10,14 @@ type PageProps = {
   date: string
 }
 
+const isOlderThanDays = (dateStr: string, days: number) => {
+  const target = new Date(dateStr)
+  const now = new Date()
+  const diffMs = now.getTime() - target.getTime()
+  const diffDays = diffMs / (1000 * 60 * 60 * 24)
+  return diffDays > days
+}
+
 const ActivityDayPage = ({
   date
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -23,6 +31,8 @@ const ActivityDayPage = ({
     eventsByDate
   } = useGithubActivity('Devollox')
 
+  const isTooOld = useMemo(() => isOlderThanDays(date, 30), [date])
+
   const handleMouseMoveItem = (e: React.MouseEvent<HTMLLIElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left
@@ -34,6 +44,19 @@ const ActivityDayPage = ({
   const handleItemClick = (url?: string) => {
     if (!url) return
     window.open(url, '_blank', 'noopener,noreferrer')
+  }
+
+  if (isTooOld) {
+    return (
+      <Page
+        title={`Activity ${date}`}
+        description="Activity details are no longer available for this day."
+      >
+        <Information title="Activity">
+          Detailed activity for this day is not available anymore because it is older than 30 days.
+        </Information>
+      </Page>
+    )
   }
 
   if (loading) {
