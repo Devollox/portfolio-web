@@ -45,11 +45,11 @@ const SignInPage = () => {
             maxWidth: '100%'
           }}
         >
-          <SignaturePrimaryButton onClick={handleSignInGitHub}>
-            Sign in with GitHub
-          </SignaturePrimaryButton>
           <SignaturePrimaryButton onClick={handleSignInGoogle}>
             Sign in with Google
+          </SignaturePrimaryButton>
+          <SignaturePrimaryButton onClick={handleSignInGitHub}>
+            Sign in with GitHub
           </SignaturePrimaryButton>
         </div>
       </div>
