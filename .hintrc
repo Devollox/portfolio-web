@@ -10,7 +10,8 @@
       {
         "ignore": [
           "user-select",
-          "backdrop-filter"
+          "backdrop-filter",
+          "-webkit-overflow-scrolling"
         ]
       }
     ],
