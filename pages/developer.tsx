@@ -90,9 +90,9 @@ const DeveloperPage = () => {
         }}
       >
         <Information title="Team" as="h2">
-          The &quot;team&quot; is mostly one developer shipping experiments,
-          plus one very patient friend trying to break them before anyone else
-          can.
+          The “team” is officially just one developer shipping experiments, plus
+          a couple of ruthless testers making sure nothing too broken escapes
+          into the wild.
         </Information>
         <div
           style={{
