@@ -7,6 +7,7 @@ import Page from '@components/page'
 import Quote from '@components/quote'
 import QuoteHero from '@components/quote/quote-hero'
 import UsedByDevollox from '@components/slider'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { subscribeTotalVisitors } from 'service/firebase'
 
@@ -47,8 +48,12 @@ const AboutPage = () => {
         <Information title="Builder. Optimizer. Solver." as="h1">
           Hello, my name is <strong>Devollox</strong>, and I am a programmer who
           values <strong>creativity</strong> and <strong>optimization</strong>.
-          This website is my place to <strong>experiment</strong> with modern
-          web technologies, polish ideas and ship small, focused projects.
+          This website is my place to{' '}
+          <Link href="/developer">
+            <strong>experiment</strong>
+          </Link>{' '}
+          with modern web technologies, polish ideas and ship small, focused
+          projects.
         </Information>
       </div>
 

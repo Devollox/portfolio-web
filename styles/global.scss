@@ -221,7 +221,22 @@ a.reset {
   outline: none;
   color: var(--fg);
   text-decoration: underline;
+  text-decoration-color: var(--fg);
   text-underline-offset: 5px;
+  transition: color 0.25s ease-out, text-decoration-color 0.25s ease-out;
+}
+
+a > strong {
+  transition: color 0.25s ease-out;
+}
+
+a > strong:hover {
+  color: var(--gray);
+}
+
+p a:hover {
+  color: var(--gray);
+  text-decoration-color: var(--gray);
 }
 
 p {
