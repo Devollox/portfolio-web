@@ -67,7 +67,7 @@ const DeveloperPage = () => {
         }}
       >
         <Information title="Why this site exists" as="h2">
-          It=s not just a portfolio. I=s a sandbox to try out patterns, measure
+          Its not just a portfolio. Is a sandbox to try out patterns, measure
           how they feel over time and keep the parts that age well. Some things
           ship quickly and get removed just as quickly. Others evolve into
           stable features that feel invisible in the best way possible.
