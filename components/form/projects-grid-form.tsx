@@ -1,12 +1,18 @@
 import type { MouseEvent } from 'react'
 import styles from './projects-grid-form.module.scss'
 
+type ProjectLink = {
+  label: string
+  href: string
+}
+
+
 type Project = {
   title: string
   role: string
   stack: string
-  link: string
   year: string
+  links: ProjectLink[]
 }
 
 type ProjectsGridProps = {
@@ -28,11 +34,8 @@ const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
       <h2 className={styles.title}>Projects</h2>
       <div className={styles.grid}>
         {projects.map(project => (
-          <a
+          <div
             key={project.title}
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
             className={styles.card}
             onMouseMove={handleMouseMove}
           >
@@ -40,9 +43,24 @@ const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
               <span className={styles.year}>{project.year}</span>
               <span className={styles.role}>{project.role}</span>
             </div>
+
             <div className={styles.name}>{project.title}</div>
             <div className={styles.stack}>{project.stack}</div>
-          </a>
+
+            <div className={styles.links}>
+              {project.links.map(link => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.linkButton}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </section>

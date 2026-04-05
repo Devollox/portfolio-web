@@ -16,15 +16,37 @@ const projects = [
     title: 'Void Presence',
     role: 'Desktop App',
     stack: 'Electron · TypeScript · Discord RPC',
-    link: 'https://www.voidpresence.site/',
-    year: '2025'
+    year: '2025',
+    links: [
+      {
+        label: 'website',
+        href: 'https://www.voidpresence.site/'
+      },
+      {
+        label: 'itch.io',
+        href: 'https://devolloxdev.itch.io/void-presence'
+      },
+      {
+        label: 'github',
+        href: 'https://github.com/Devollox/void-presence'
+      }
+    ]
   },
   {
     title: 'Portfolio Web',
     role: 'Website',
     stack: 'Next.js · TypeScript · Firebase · SCSS',
-    link: 'https://www.devollox.fun/',
-    year: '2022'
+    year: '2022',
+    links: [
+      {
+        label: 'website',
+        href: 'https://devollox.fun/'
+      },
+      {
+        label: 'github',
+        href: 'https://github.com/Devollox/portfolio-web'
+      }
+    ]
   }
 ]
 
