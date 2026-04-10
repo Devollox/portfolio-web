@@ -110,7 +110,7 @@ const DeveloperPage = () => {
           />
           <AvatarCard
             name="White"
-            tooltip="finds the bugs."
+            tooltip="production gatekeeper."
             avatarSrc="white"
           />
         </div>
