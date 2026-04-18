@@ -15,7 +15,7 @@ const projects = [
   {
     title: 'Void Presence',
     role: 'Desktop App',
-    stack: 'Electron · Firebase · TypeScript · Discord RPC',
+    stack: 'Electron · TypeScript · Firebase · Discord RPC',
     year: '2025',
     links: [
       {
