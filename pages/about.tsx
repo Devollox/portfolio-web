@@ -33,6 +33,23 @@ const projects = [
     ]
   },
   {
+    title: 'Void Presence Web',
+    role: 'Website',
+    stack: 'Next.js · TypeScript · Firebase · SCSS',
+    year: '2025',
+    links: [
+      {
+        label: 'website',
+        href: 'https://www.voidpresence.site/'
+      },
+
+      {
+        label: 'github',
+        href: 'https://github.com/Devollox/void-presence-web'
+      }
+    ]
+  },
+  {
     title: 'Portfolio Web',
     role: 'Website',
     stack: 'Next.js · TypeScript · Firebase · SCSS',
