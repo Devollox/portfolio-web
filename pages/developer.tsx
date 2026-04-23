@@ -105,7 +105,7 @@ const DeveloperPage = () => {
           <AvatarCard name="Devollox" tooltip="writes the bugs." />
           <AvatarCard
             name="Drag"
-            tooltip="shipped the first experiments."
+            tooltip="master of the soundscape."
             avatarSrc="drag"
           />
           <AvatarCard
