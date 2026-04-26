@@ -1,5 +1,3 @@
-<img width="3844" height="793" alt="484064966-2c662772-bca1-4de312312-988f-5304d7dfd87d" src="https://github.com/user-attachments/assets/d6bef4b1-b81c-423f-bba1-87fb57236a98" />
-
 ## About the Project
 
 This is my personal portfolio website built with [Next.js](https://nextjs.org/).

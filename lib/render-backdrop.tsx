@@ -1,21 +1,15 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-type StarOptions = {
-  x?: number
-  y?: number
-}
-
-type DrawableEntity = {
-  update: () => void
-}
+const lerp = (start: number, end: number, t: number) =>
+  start * (1 - t) + end * t
 
 export default function RenderBackdropAnimation() {
-  const { theme, systemTheme } = useTheme()
-  const resolvedTheme = theme === 'system' ? systemTheme : theme
+  const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -24,153 +18,146 @@ export default function RenderBackdropAnimation() {
   useEffect(() => {
     if (!mounted || !resolvedTheme) return
 
-    const background = document.getElementById(
-      'bgCanvas'
-    ) as HTMLCanvasElement | null
-    if (!background) return
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
 
-    const backgroundContext = background.getContext('2d')
-    if (!backgroundContext) return
-
-    const ctx = backgroundContext as CanvasRenderingContext2D
-
-    const width = window.innerWidth
-    const height = window.innerHeight
-
-    background.width = width
-    background.height = height
+    let width = (canvas.width = window.innerWidth)
+    let height = (canvas.height = window.innerHeight)
 
     const isDark = resolvedTheme === 'dark'
-    const starColor = isDark ? '#fff' : '#000'
-    const bgColor = isDark ? '#000' : '#fff'
+    const starColor = isDark ? '#ffffff' : '#000000'
+    const bgColor = isDark ? '#000000' : '#ffffff'
 
-    class Star implements DrawableEntity {
-      size: number
-      speed: number
-      x: number
-      y: number
-      life: number
-      fadeInSpeed: number
-
-      constructor(options: StarOptions = {}) {
-        this.size = 0
-        this.speed = 0
-        this.x = 0
-        this.y = 0
-        this.life = 0
-        this.fadeInSpeed = 0
-        this.reset(options)
-      }
-
-      reset(options: StarOptions = {}) {
-        this.size = Math.random() * 2
-        this.speed = Math.random() * 0.1
-        this.x = options.x ?? width
-        this.y = options.y ?? Math.random() * height
-        this.life = 0
-        this.fadeInSpeed = 0.01 + Math.random() * 0.02
-      }
-
-      update() {
-        this.x -= this.speed
-        if (this.x < 0) {
-          this.reset()
-          return
-        }
-
-        if (this.life < 1) {
-          this.life += this.fadeInSpeed
-          if (this.life > 1) this.life = 1
-        }
-
-        ctx.globalAlpha = this.life
-        ctx.fillRect(this.x, this.y, this.size, this.size)
-        ctx.globalAlpha = 1
-      }
+    const drawBackground = () => {
+      ctx.fillStyle = bgColor
+      ctx.fillRect(0, 0, width, height)
     }
 
-    class ShootingStar implements DrawableEntity {
-      x: number
-      y: number
-      len: number
-      speed: number
-      size: number
-      waitTime: number
-      active: boolean
+    class Star {
+      x = 0
+      y = 0
+      size = 0
+      speed = 0
+      opacity = 0
+      targetOpacity = 0.8
 
       constructor() {
-        this.x = 0
-        this.y = 0
-        this.len = 0
-        this.speed = 0
-        this.size = 0
-        this.waitTime = 0
-        this.active = false
         this.reset()
+        this.opacity = 0
       }
 
       reset() {
         this.x = Math.random() * width
-        this.y = 0
-        this.len = Math.random() * 80 + 10
-        this.speed = Math.random() * 10 + 6
-        this.size = Math.random() * 1 - 0.1
-        this.waitTime = Date.now() + Math.random() * 3000 + 500
-        this.active = false
+        this.y = Math.random() * height
+        this.size = Math.random() * 1.5
+        this.speed = Math.random() * 0.05 + 0.02
+        this.targetOpacity = 0.4 + Math.random() * 0.4
       }
 
-      update() {
+      update(ctx: CanvasRenderingContext2D) {
+        this.x -= this.speed
+        this.opacity = lerp(this.opacity, this.targetOpacity, 0.02)
+        if (this.x < 0) this.reset()
+
+        ctx.fillStyle = `${starColor}${Math.floor(this.opacity * 255)
+          .toString(16)
+          .padStart(2, '0')}`
+        ctx.beginPath()
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        ctx.fill()
+      }
+    }
+
+    class ShootingStar {
+      x = 0
+      y = 0
+      len = 0
+      speed = 0
+      active = false
+      timer = 0
+
+      constructor() {
+        this.reset()
+      }
+
+      reset() {
+        this.x = width + 100
+        this.y = Math.random() * height * 0.5
+        this.len = Math.random() * 150 + 50
+        this.speed = Math.random() * 8 + 4
+        this.active = false
+        this.timer = Date.now() + Math.random() * 5000
+      }
+
+      update(ctx: CanvasRenderingContext2D) {
+        if (!this.active && Date.now() > this.timer) this.active = true
         if (this.active) {
-          this.size -= 0.15
           this.x -= this.speed
-          this.y += this.speed
-          if (this.x < 0 || this.y >= height || this.size <= 0) {
-            this.reset()
-          } else {
-            ctx.lineWidth = this.size
-            ctx.beginPath()
-            ctx.moveTo(this.x, this.y)
-            ctx.lineTo(this.x + this.len, this.y - this.len)
-            ctx.stroke()
-          }
-        } else if (this.waitTime < Date.now()) {
-          this.active = true
+          this.y += this.speed * 0.5
+          const grad = ctx.createLinearGradient(
+            this.x,
+            this.y,
+            this.x + this.len,
+            this.y - this.len * 0.5
+          )
+          grad.addColorStop(0, `${starColor}cc`)
+          grad.addColorStop(1, 'transparent')
+          ctx.strokeStyle = grad
+          ctx.lineWidth = 1
+          ctx.beginPath()
+          ctx.moveTo(this.x, this.y)
+          ctx.lineTo(this.x + this.len, this.y - this.len * 0.5)
+          ctx.stroke()
+          if (this.x < -200) this.reset()
         }
       }
     }
 
-    const entities: DrawableEntity[] = [
-      ...Array.from(
-        { length: Math.floor(height / 10) },
-        () => new Star({ x: Math.random() * width, y: Math.random() * height })
-      ),
-      new ShootingStar(),
-      new ShootingStar()
-    ]
+    const stars = Array.from({ length: 120 }, () => new Star())
+    const shooters = [new ShootingStar(), new ShootingStar()]
+
+    drawBackground()
 
     let animationId: number
-
     const animate = () => {
-      ctx.fillStyle = bgColor
-      ctx.fillRect(0, 0, width, height)
+      drawBackground()
       ctx.fillStyle = starColor
       ctx.strokeStyle = starColor
-
-      entities.forEach(e => e.update())
+      stars.forEach(s => s.update(ctx))
+      shooters.forEach(s => s.update(ctx))
       animationId = requestAnimationFrame(animate)
     }
 
-    ctx.fillStyle = bgColor
-    ctx.fillRect(0, 0, width, height)
+    animate()
 
-    animationId = requestAnimationFrame(animate)
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth
+      height = canvas.height = window.innerHeight
+      drawBackground()
+    }
 
+    window.addEventListener('resize', handleResize)
     return () => {
-      cancelAnimationFrame(animationId)
+      if (animationId) cancelAnimationFrame(animationId)
+      window.removeEventListener('resize', handleResize)
     }
   }, [mounted, resolvedTheme])
 
-  if (!mounted || !resolvedTheme) return null
+  if (!mounted) return null
 
-  return <canvas id="bgCanvas" />
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none'
+      }}
+    />
+  )
 }
